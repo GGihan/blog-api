@@ -1,0 +1,28 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "This project is using an API only back-end and two different front-ends. One of the front-end sites will be for people that want to read and comment on posts and the other one will be just for writing, editing and publishing posts.",
+  "main": "index.js",
+  "workspaces":[
+    "backend",
+    "frontend-editor",
+    "frontend-reader"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:editor": "npm run dev --workspace=frontend-editor",
+    "dev:reader": "npm run dev --workspace=frontend-reader"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GGihan/blog-api.git"
+  },
+  "keywords": [],
+  "author": "GGihan",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/GGihan/blog-api/issues"
+  },
+  "homepage": "https://github.com/GGihan/blog-api#readme"
+}
