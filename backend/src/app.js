@@ -2,9 +2,9 @@ import 'dotenv/config';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import express from 'express';
-import jwt from 'jsonwebtoken';
 import { prisma } from '../lib/prisma.js';
 import bcrypt from 'bcryptjs';
+import authRouter from './routes/authRouter.js';
 import postRouter from './routes/postRouter.js';
 
 const app = express();
@@ -14,7 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routers
-// app.use('/api/auth', );
+app.use('/api/auth', authRouter);
+// app.use('api/users', );
 app.use('/api/posts', postRouter);
 // app.use('/api/comments', );
 

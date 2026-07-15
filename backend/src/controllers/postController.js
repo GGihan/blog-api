@@ -1,6 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
 import { body, validationResult, matchedData } from 'express-validator';
-import bcrypt from 'bcryptjs';
 
 // Controls
 export const getAllPosts = async (req, res) => {
