@@ -5,6 +5,7 @@ import express from 'express';
 import { prisma } from '../lib/prisma.js';
 import bcrypt from 'bcryptjs';
 import authRouter from './routes/authRouter.js';
+import userRouter from './routes/userRouter.js';
 import postRouter from './routes/postRouter.js';
 
 const app = express();
@@ -15,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routers
 app.use('/api/auth', authRouter);
-// app.use('api/users', );
+app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
 // app.use('/api/comments', );
 
