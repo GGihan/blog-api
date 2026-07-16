@@ -6,22 +6,48 @@ import { handleValidation } from "../middleware/handleValidation.js";
 // Controls
 export const getAllPosts = async (req, res) => {
   const userRole = req.user?.role;
-  let allPosts = [];
-  
-  if (userRole === 'AUTHOR') {
-    allPosts = await prisma.post.findMany({
-      orderBy: { createdAt: 'desc' },
-    });
-  } else {
-    allPosts = await prisma.post.findMany({
-      where: { published: true },
-      orderBy: { createdAt: 'desc' },
-    });
+  // Set limit for post amount per page
+  const MAX_LIMIT = 50;
+  const page = Math.max(1, parseInt(req.query.page) || 1);
+  let limit = parseInt(req.query.limit) || 10;
+  if (limit > MAX_LIMIT) {
+    limit = MAX_LIMIT;
+  } else if (limit < 1) {
+    limit = 1;
   }
+  const skip = (page - 1) * limit;
+  // Show all unpublished posts if Author
+  let whereClause = {};
+  if (userRole !== 'AUTHOR') {
+    whereClause = { published: true };
+  }
+  // Use $transaction to prevent race condition
+  const [allPosts, totalPosts] = await prisma.$transaction([
+    prisma.post.findMany({
+      where: whereClause,
+      orderBy: { createdAt: 'desc' },
+      take: limit,
+      skip: skip,
+      include: {
+        _count: {
+          select: { comments: true },
+        },
+      },
+    }),
+    prisma.post.count({
+      where: whereClause,
+    }),
+  ]);
   
   res.json({
     success: true,
     posts: allPosts,
+    pagination: {
+      totalPosts,
+      currentPage: page,
+      totalPages: Math.ceil(totalPosts / limit),
+      hasMore: page * limit < totalPosts,
+    },
   });
 };
 
@@ -29,7 +55,12 @@ export const getPostById = async (req, res) => {
   const postId = parseInt(req.params.postId);
   const userRole = req.user?.role;
   const post = await prisma.post.findUnique({
-    where: { id: postId }
+    where: { id: postId },
+    include: {
+      comments: {
+        orderBy: { createdAt: 'desc' }
+      },
+    },
   });
 
   if (!post) {
