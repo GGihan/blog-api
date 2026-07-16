@@ -146,4 +146,4 @@ vite.config.ts.timestamp-*
 backend/generated/prisma
 
 # Test files
-backend/*.http
+*.http
