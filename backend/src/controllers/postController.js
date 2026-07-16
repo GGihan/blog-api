@@ -73,3 +73,35 @@ export const createPost = [
     });
   },
 ];
+
+export const updatePost = [
+  validatePost,
+  handleValidation,
+  async (req, res) => {
+    let { title, content, published } = matchedData(req);
+    const postId = parseInt(req.params.postId);
+    try {
+      const updatedPost = await prisma.post.update({
+        where: { id: postId },
+        data: { 
+          title,
+          content, 
+          published,
+        },
+      });
+
+      res.json({ 
+        success: true, 
+        post: updatedPost,
+      });
+    } catch (error) {
+      // Prisma code for "Record to update not found" is 'P2025'
+      if (error.code === 'P2025') {
+        return res.status(404).json({ 
+          success: false, 
+          message: "Post not found." 
+        });
+      }
+    }
+  },
+];

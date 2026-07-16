@@ -8,6 +8,7 @@ const passwordLengthErr = 'must be between 8 and 72 characters.';
 const titleLengthErr = 'must be between 3 and 50 characters.';
 const contentLengthErr = 'must be between 10 and 1000 characters.';
 const symbolErr = 'can only contain letters, numbers, underscores, and hyphens.';
+const booleanErr = 'must be a true or false value.';
 
 // Validations
 export const validateRegister = [
@@ -49,4 +50,7 @@ export const validatePost = [
     .trim()
     .notEmpty().withMessage(`Content ${emptyErr}`)
     .isLength({ min: 10, max: 1000 }).withMessage(`Content ${contentLengthErr}`),
+  body('published')
+    .optional()
+    .isBoolean().withMessage(`Published ${booleanErr}`),
 ];
