@@ -1,6 +1,6 @@
 import { prisma } from "../../lib/prisma.js";
 import { matchedData } from 'express-validator';
-import { validatePost } from "../middleware/validators.js";
+import { validateCreatePost, validateUpdatePost } from "../middleware/validators.js";
 import { handleValidation } from "../middleware/handleValidation.js";
 
 // Controls
@@ -53,15 +53,16 @@ export const getPostById = async (req, res) => {
 };
 
 export const createPost = [
-  validatePost,
+  validateCreatePost,
   handleValidation,
   async (req, res) => {
-    let { title, content } = matchedData(req);
+    let { title, content, published } = matchedData(req);
     const userId = req.user.id;
     const newPost = await prisma.post.create({
       data: {
         title,
         content,
+        published,
         userId,
       },
     });
@@ -75,7 +76,7 @@ export const createPost = [
 ];
 
 export const updatePost = [
-  validatePost,
+  validateUpdatePost,
   handleValidation,
   async (req, res) => {
     let { title, content, published } = matchedData(req);

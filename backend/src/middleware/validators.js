@@ -41,12 +41,28 @@ export const validateLogIn = [
     .notEmpty().withMessage(`Password ${emptyErr}`),
 ];
 
-export const validatePost = [
+export const validateCreatePost = [
   body('title')
     .trim()
     .notEmpty().withMessage(`Title ${emptyErr}`)
     .isLength({ min: 3, max: 50 }).withMessage(`Title ${titleLengthErr}`),
   body('content')
+    .trim()
+    .notEmpty().withMessage(`Content ${emptyErr}`)
+    .isLength({ min: 10, max: 1000 }).withMessage(`Content ${contentLengthErr}`),
+  body('published')
+    .optional()
+    .isBoolean().withMessage(`Published ${booleanErr}`),
+];
+
+export const validateUpdatePost = [
+  body('title')
+    .optional()
+    .trim()
+    .notEmpty().withMessage(`Title ${emptyErr}`)
+    .isLength({ min: 3, max: 50 }).withMessage(`Title ${titleLengthErr}`),
+  body('content')
+    .optional()
     .trim()
     .notEmpty().withMessage(`Content ${emptyErr}`)
     .isLength({ min: 10, max: 1000 }).withMessage(`Content ${contentLengthErr}`),
