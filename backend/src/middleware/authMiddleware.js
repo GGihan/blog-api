@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-// Check if logged in and attach payload to request
+// Read header token 
 export const requireAuth = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
@@ -13,7 +13,7 @@ export const requireAuth = (req, res, next) => {
   // Verify the token
   try {
     const decodedPayload = jwt.verify(token, process.env.JWT_SECRET_KEY);
-  
+    // Attach payload (user information) to request user property
     req.user = decodedPayload;
     
     next();

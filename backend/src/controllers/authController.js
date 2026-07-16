@@ -65,7 +65,7 @@ export const loginUser = [
         message: 'Invalid username or password.',
       });
     }
-
+    // Generate a new token everytime the user logs in
     const token = jwt.sign(
       { 
         id: user.id,

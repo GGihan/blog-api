@@ -5,6 +5,8 @@ import { prisma } from "../../lib/prisma.js";
 const emptyErr = 'can\'t be empty.';
 const usernameLengthErr = 'must be between 3 and 30 characters.';
 const passwordLengthErr = 'must be between 8 and 72 characters.';
+const titleLengthErr = 'must be between 3 and 50 characters.';
+const contentLengthErr = 'must be between 10 and 1000 characters.';
 const symbolErr = 'can only contain letters, numbers, underscores, and hyphens.';
 
 // Validations
@@ -36,4 +38,15 @@ export const validateLogIn = [
     .notEmpty().withMessage(`Username ${emptyErr}`),
   body('password')
     .notEmpty().withMessage(`Password ${emptyErr}`),
+];
+
+export const validatePost = [
+  body('title')
+    .trim()
+    .notEmpty().withMessage(`Title ${emptyErr}`)
+    .isLength({ min: 3, max: 50 }).withMessage(`Title ${titleLengthErr}`),
+  body('content')
+    .trim()
+    .notEmpty().withMessage(`Content ${emptyErr}`)
+    .isLength({ min: 10, max: 1000 }).withMessage(`Content ${contentLengthErr}`),
 ];

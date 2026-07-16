@@ -5,10 +5,10 @@ Content-Type: application/json
 ### Create post as author
 POST http://localhost:8080/api/posts
 Content-Type: application/json
-Authorization: Bearer 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6IkFVVEhPUiIsImlhdCI6MTc4NDE5NTIwMiwiZXhwIjoxNzg0MjgxNjAyfQ.SezCjC4FlsI2fENij7sYSn0g24leO8eJMiSNbyuWCvo
 
-{
-  "title": "test title",
+{ 
+  "title": "test title123",
   "content": "just some text for the content."
 }
 ### Register
@@ -16,7 +16,7 @@ POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "username": "new_author2",
+  "username": "new_author",
   "password": "authorpass123"
 }
 ### Login
@@ -27,3 +27,7 @@ Content-Type: application/json
   "username": "new_author2",
   "password": "authorpass123"
 }
+### Get me
+GET http://localhost:8080/api/users/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Niwicm9sZSI6IlVTRVIiLCJpYXQiOjE3ODQxNDE3NDQsImV4cCI6MTc4NDIyODE0NH0.lNb4y3T_bTjr6Lf9e5x740GpiEzrNu-Z99M25hHXNDo
