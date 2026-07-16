@@ -89,7 +89,7 @@ export const getPostById = async (req, res) => {
 
 export const createPost = async (req, res) => {
   let { title, content, published } = matchedData(req);
-  const userId = req.user.postId;
+  const userId = req.user.id;
   const newPost = await prisma.post.create({
     data: {
       title,
