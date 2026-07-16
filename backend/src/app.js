@@ -7,6 +7,7 @@ import bcrypt from 'bcryptjs';
 import authRouter from './routes/authRouter.js';
 import userRouter from './routes/userRouter.js';
 import postRouter from './routes/postRouter.js';
+import commentRouter from './routes/commentRouter.js';
 
 const app = express();
 
@@ -18,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/posts', postRouter);
-// app.use('/api/comments', );
+app.use('/api/comments', commentRouter);
 
 // All none existing paths here
 app.get('*path', (req, res) => {

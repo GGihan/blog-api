@@ -97,6 +97,11 @@ export const createPost = async (req, res) => {
       published,
       userId,
     },
+    include: {
+      user: {
+        select: { username: true },
+      },
+    },
   });
 
   res.status(201).json({

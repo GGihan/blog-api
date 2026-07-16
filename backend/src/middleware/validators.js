@@ -6,7 +6,8 @@ const emptyErr = 'can\'t be empty.';
 const usernameLengthErr = 'must be between 3 and 30 characters.';
 const passwordLengthErr = 'must be between 8 and 72 characters.';
 const titleLengthErr = 'must be between 3 and 50 characters.';
-const contentLengthErr = 'must be between 10 and 1000 characters.';
+const postContentLengthErr = 'must be between 10 and 1000 characters.';
+const commentContentLengthErr = 'must be between 3 and 500 characters.';
 const symbolErr = 'can only contain letters, numbers, underscores, and hyphens.';
 const booleanErr = 'must be a true or false value.';
 
@@ -49,7 +50,7 @@ export const validateCreatePost = [
   body('content')
     .trim()
     .notEmpty().withMessage(`Content ${emptyErr}`)
-    .isLength({ min: 10, max: 1000 }).withMessage(`Content ${contentLengthErr}`),
+    .isLength({ min: 10, max: 1000 }).withMessage(`Content ${postContentLengthErr}`),
   body('published')
     .optional()
     .isBoolean().withMessage(`Published ${booleanErr}`),
@@ -65,7 +66,7 @@ export const validateUpdatePost = [
     .optional()
     .trim()
     .notEmpty().withMessage(`Content ${emptyErr}`)
-    .isLength({ min: 10, max: 1000 }).withMessage(`Content ${contentLengthErr}`),
+    .isLength({ min: 10, max: 1000 }).withMessage(`Content ${postContentLengthErr}`),
   body('published')
     .optional()
     .isBoolean().withMessage(`Published ${booleanErr}`),
@@ -81,3 +82,10 @@ export const validateId = (req, res, next) => {
   }
   next();
 };
+
+export const validateComment = [
+  body('content')
+    .trim()
+    .notEmpty().withMessage(`Content ${emptyErr}`)
+    .isLength({ min: 3, max: 500 }).withMessage(`Content ${commentContentLengthErr}`),
+];

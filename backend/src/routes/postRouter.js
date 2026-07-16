@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { getAllPosts, getPostById, createPost, updatePost, deletePost } from "../controllers/postController.js";
+import { createComment } from "../controllers/commentController.js";
 import { requireAuth, optionalAuth, isAuthor } from '../middleware/authMiddleware.js';
-import { validateCreatePost, validateUpdatePost, validateId } from "../middleware/validators.js";
+import { validateCreatePost, validateUpdatePost, validateId, validateComment } from "../middleware/validators.js";
 import { handleValidation } from "../middleware/handleValidation.js";
 
 const postRouter = Router();
@@ -18,5 +19,12 @@ postRouter.patch('/:id',
   updatePost
 );
 postRouter.delete('/:id', requireAuth, isAuthor, validateId, deletePost);
+postRouter.post('/:id/comments',
+  requireAuth,
+  validateId,
+  validateComment,
+  handleValidation,
+  createComment
+);
 
 export default postRouter;
