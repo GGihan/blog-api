@@ -30,6 +30,9 @@ export const getAllPosts = async (req, res) => {
         _count: {
           select: { comments: true },
         },
+        user: {
+          select: { username: true },
+        },
       },
     }),
     prisma.post.count({
@@ -56,7 +59,10 @@ export const getPostById = async (req, res) => {
     where: { id: postId },
     include: {
       comments: {
-        orderBy: { createdAt: 'desc' }
+        orderBy: { createdAt: 'desc' },
+      },
+      user: {
+        select: { username: true },
       },
     },
   });
