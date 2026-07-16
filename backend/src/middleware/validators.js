@@ -70,3 +70,14 @@ export const validateUpdatePost = [
     .optional()
     .isBoolean().withMessage(`Published ${booleanErr}`),
 ];
+
+export const validateId = (req, res, next) => {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) {
+    return res.status(400).json({
+      success: false, 
+      message: "Invalid ID format.",
+    });
+  }
+  next();
+};

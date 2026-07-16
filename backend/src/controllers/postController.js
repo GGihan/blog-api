@@ -1,7 +1,5 @@
 import { prisma } from "../../lib/prisma.js";
 import { matchedData } from 'express-validator';
-import { validateCreatePost, validateUpdatePost } from "../middleware/validators.js";
-import { handleValidation } from "../middleware/handleValidation.js";
 
 // Controls
 export const getAllPosts = async (req, res) => {
@@ -52,7 +50,7 @@ export const getAllPosts = async (req, res) => {
 };
 
 export const getPostById = async (req, res) => {
-  const postId = parseInt(req.params.postId);
+  const postId = parseInt(req.params.id);
   const userRole = req.user?.role;
   const post = await prisma.post.findUnique({
     where: { id: postId },
@@ -83,57 +81,71 @@ export const getPostById = async (req, res) => {
   });
 };
 
-export const createPost = [
-  validateCreatePost,
-  handleValidation,
-  async (req, res) => {
-    let { title, content, published } = matchedData(req);
-    const userId = req.user.id;
-    const newPost = await prisma.post.create({
-      data: {
+export const createPost = async (req, res) => {
+  let { title, content, published } = matchedData(req);
+  const userId = req.user.id;
+  const newPost = await prisma.post.create({
+    data: {
+      title,
+      content,
+      published,
+      userId,
+    },
+  });
+
+  res.status(201).json({
+    success: true,
+    message: 'New post created.',
+    post: newPost,
+  });
+};
+
+export const updatePost = async (req, res) => {
+  let { title, content, published } = matchedData(req);
+  const postId = parseInt(req.params.id);
+  try {
+    const updatedPost = await prisma.post.update({
+      where: { id: postId },
+      data: { 
         title,
-        content,
+        content, 
         published,
-        userId,
       },
     });
 
-    res.status(201).json({
-      success: true,
-      message: 'New post created.',
-      post: newPost,
+    res.json({ 
+      success: true, 
+      post: updatedPost,
     });
-  },
-];
-
-export const updatePost = [
-  validateUpdatePost,
-  handleValidation,
-  async (req, res) => {
-    let { title, content, published } = matchedData(req);
-    const postId = parseInt(req.params.postId);
-    try {
-      const updatedPost = await prisma.post.update({
-        where: { id: postId },
-        data: { 
-          title,
-          content, 
-          published,
-        },
+  } catch (error) {
+    // Prisma code for "Record to update not found" is 'P2025'
+    if (error.code === 'P2025') {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Post not found." 
       });
-
-      res.json({ 
-        success: true, 
-        post: updatedPost,
-      });
-    } catch (error) {
-      // Prisma code for "Record to update not found" is 'P2025'
-      if (error.code === 'P2025') {
-        return res.status(404).json({ 
-          success: false, 
-          message: "Post not found." 
-        });
-      }
     }
-  },
-];
+  }
+};
+
+export const deletePost = async (req, res) => {
+  const postId = parseInt(req.params.id);
+  try {
+    const deletedPost = await prisma.post.delete({
+      where: { id: postId},
+    });
+
+    res.json({
+      success: true,
+      message: 'Post deleted.',
+      deletedPostId: deletedPost.id,
+    });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Post not found." 
+      });
+    }
+  }
+};
