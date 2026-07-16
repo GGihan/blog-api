@@ -73,7 +73,7 @@ export const validateUpdatePost = [
 ];
 
 export const validateId = (req, res, next) => {
-  const id = parseInt(req.params.id);
+  const id = parseInt(req.params.postId || req.params.commentId);
   if (isNaN(id)) {
     return res.status(400).json({
       success: false, 

@@ -53,7 +53,7 @@ export const getAllPosts = async (req, res) => {
 };
 
 export const getPostById = async (req, res) => {
-  const postId = parseInt(req.params.id);
+  const postId = parseInt(req.params.postId);
   const userRole = req.user?.role;
   const post = await prisma.post.findUnique({
     where: { id: postId },
@@ -89,7 +89,7 @@ export const getPostById = async (req, res) => {
 
 export const createPost = async (req, res) => {
   let { title, content, published } = matchedData(req);
-  const userId = req.user.id;
+  const userId = req.user.postId;
   const newPost = await prisma.post.create({
     data: {
       title,
@@ -113,7 +113,7 @@ export const createPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
   let { title, content, published } = matchedData(req);
-  const postId = parseInt(req.params.id);
+  const postId = parseInt(req.params.postId);
   try {
     const updatedPost = await prisma.post.update({
       where: { id: postId },
@@ -140,7 +140,7 @@ export const updatePost = async (req, res) => {
 };
 
 export const deletePost = async (req, res) => {
-  const postId = parseInt(req.params.id);
+  const postId = parseInt(req.params.postId);
   try {
     const deletedPost = await prisma.post.delete({
       where: { id: postId},

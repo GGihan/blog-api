@@ -8,9 +8,9 @@ import { handleValidation } from "../middleware/handleValidation.js";
 const postRouter = Router();
 
 postRouter.get('/', optionalAuth, getAllPosts);
-postRouter.get('/:id', optionalAuth, validateId, getPostById);
+postRouter.get('/:postId', optionalAuth, validateId, getPostById);
 postRouter.post('/', requireAuth, isAuthor, validateCreatePost, handleValidation, createPost);
-postRouter.patch('/:id', 
+postRouter.patch('/:postId', 
   requireAuth, 
   isAuthor, 
   validateId, 
@@ -18,8 +18,8 @@ postRouter.patch('/:id',
   handleValidation, 
   updatePost
 );
-postRouter.delete('/:id', requireAuth, isAuthor, validateId, deletePost);
-postRouter.post('/:id/comments',
+postRouter.delete('/:postId', requireAuth, isAuthor, validateId, deletePost);
+postRouter.post('/:postId/comments',
   requireAuth,
   validateId,
   validateComment,
