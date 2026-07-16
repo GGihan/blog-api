@@ -25,6 +25,23 @@ export const requireAuth = (req, res, next) => {
   }
 };
 
+export const optionalAuth = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (!token) {
+    return next();
+  }
+
+  try {
+    const decodedPayload = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    req.user = decodedPayload;
+    
+    next();
+  } catch (error) {
+    next();
+  }
+};
+
 export const isAuthor = (req, res, next) => {
   if (req.user.role !== 'AUTHOR') {
     return res.status(403).json({

@@ -5,7 +5,19 @@ import { handleValidation } from "../middleware/handleValidation.js";
 
 // Controls
 export const getAllPosts = async (req, res) => {
-  const allPosts = await prisma.post.findMany();
+  const userRole = req.user?.role;
+  let allPosts = [];
+  
+  if (userRole === 'AUTHOR') {
+    allPosts = await prisma.post.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+  } else {
+    allPosts = await prisma.post.findMany({
+      where: { published: true },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
   
   res.json({
     success: true,
@@ -13,11 +25,33 @@ export const getAllPosts = async (req, res) => {
   });
 };
 
-// export const getPostById = async (req, res) => {
+export const getPostById = async (req, res) => {
+  const postId = parseInt(req.params.postId);
+  const userRole = req.user?.role;
+  const post = await prisma.post.findUnique({
+    where: { id: postId }
+  });
 
-// };
+  if (!post) {
+    return res.status(404).json({
+      success: false,
+      message: "Post not found.",
+    });
+  }
 
-// add validation later on
+  if (!post.published && userRole !== 'AUTHOR') {
+    return res.status(404).json({
+      success: false,
+      message: "Post not found.",
+    });
+  }
+
+  res.json({
+    success: true,
+    post,
+  });
+};
+
 export const createPost = [
   validatePost,
   handleValidation,

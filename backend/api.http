@@ -1,6 +1,7 @@
 ###
 GET http://localhost:8080/api/posts
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwicm9sZSI6IkFVVEhPUiIsImlhdCI6MTc4NDE5NTIwMiwiZXhwIjoxNzg0MjgxNjAyfQ.SezCjC4FlsI2fENij7sYSn0g24leO8eJMiSNbyuWCvo
 
 ### Create post as author
 POST http://localhost:8080/api/posts

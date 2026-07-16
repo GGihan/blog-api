@@ -1,11 +1,13 @@
 import { Router } from "express";
-import { getAllPosts, createPost } from "../controllers/postController.js";
-import { requireAuth, isAuthor } from '../middleware/authMiddleware.js';
+import { getAllPosts, getPostById, createPost } from "../controllers/postController.js";
+import { requireAuth, optionalAuth, isAuthor } from '../middleware/authMiddleware.js';
 
 const postRouter = Router();
 
-postRouter.get('/', getAllPosts);
-// postRouter.get('/:postId', getPostById);
-postRouter.post('/', requireAuth, isAuthor, createPost)
+postRouter.get('/', optionalAuth, getAllPosts);
+postRouter.get('/:postId', optionalAuth, getPostById);
+postRouter.post('/', requireAuth, isAuthor, createPost);
+// postRouter.patch('/:postId', requireAuth, isAuthor, updatePost);
+// postRouter.delete('/:postId', requireAuth, isAuthor, deletePost);
 
 export default postRouter;
