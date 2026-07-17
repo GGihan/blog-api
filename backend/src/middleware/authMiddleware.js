@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { prisma } from '../../lib/prisma.js';
 
 // Read header token 
 export const requireAuth = (req, res, next) => {
@@ -51,3 +52,31 @@ export const isAuthor = (req, res, next) => {
   }
   next();
 };
+
+export const canUpdateComment = async (req, res, next) => {
+  const userId = req.user.id;
+  const commentId = parseInt(req.params.commentId);
+  try {
+    const comment = await prisma.comment.findUnique({
+      where: { id: commentId },
+    });
+
+    if (!comment) {
+      return res.status(404).json({
+        success: false,
+        message: "Comment not found."
+      });
+    }
+
+    if (comment.userId !== userId) {
+      return res.status(403).json({
+        success: false,
+        message: "Forbidden."
+      });
+    }
+
+    next();
+  } catch (error) {
+    next(error)
+  }
+}

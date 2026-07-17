@@ -60,6 +60,11 @@ export const getPostById = async (req, res) => {
     include: {
       comments: {
         orderBy: { createdAt: 'desc' },
+        include: {
+          user: { 
+            select: { username: true },
+          },
+        },
       },
       user: {
         select: { username: true },

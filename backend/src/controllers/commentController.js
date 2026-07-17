@@ -4,7 +4,7 @@ import { matchedData } from "express-validator";
 export const createComment = async (req, res) => {
   let { content } = matchedData(req);
   const userId = req.user.id;
-  const postId = parseInt(req.params.id);
+  const postId = parseInt(req.params.postId);
   const newComment = await prisma.comment.create({
     data: {
       content,
@@ -22,4 +22,30 @@ export const createComment = async (req, res) => {
     success: true,
     comment: newComment,
   });
+};
+
+export const updateComment = async (req, res) => {
+  let { content } = matchedData(req);
+  const userId = req.user.id;
+  const commentId = parseInt(req.params.commentId);
+  try {
+    const updatedComment = await prisma.comment.update({
+    where: { id: commentId },
+    data: {
+      content,
+    }
+  });
+
+  res.json({
+    succes: true,
+    comment: updatedComment,
+  });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Comment not found." 
+      });
+    }
+  }
 };
