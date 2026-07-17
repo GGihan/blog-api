@@ -53,8 +53,9 @@ export const isAuthor = (req, res, next) => {
   next();
 };
 
-export const canUpdateComment = async (req, res, next) => {
+export const verfiyCommentAccess = async (req, res, next) => {
   const userId = req.user.id;
+  const userRole = req.user.role;
   const commentId = parseInt(req.params.commentId);
   try {
     const comment = await prisma.comment.findUnique({
@@ -68,15 +69,21 @@ export const canUpdateComment = async (req, res, next) => {
       });
     }
 
-    if (comment.userId !== userId) {
-      return res.status(403).json({
-        success: false,
-        message: "Forbidden."
-      });
+    const isCommentOwner = comment.userId === userId;
+    const isAuthor = userRole === 'AUTHOR';
+    // Branching Authorization Logic based on the request method
+    if (req.method === 'DELETE') {
+      if (!isCommentOwner && !isAuthor) {
+        return res.status(403).json({ success: false, message: "Forbidden." });
+      }
+    } else if (req.method === 'PATCH') {
+      if (!isCommentOwner) {
+        return res.status(403).json({ success: false, message: "Forbidden." });
+      }
     }
-
+    
     next();
   } catch (error) {
     next(error)
   }
-}
+};

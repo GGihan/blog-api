@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { updateComment } from "../controllers/commentController.js";
-import { requireAuth, canUpdateComment } from "../middleware/authMiddleware.js";
+import { updateComment, deleteComment } from "../controllers/commentController.js";
+import { requireAuth, verfiyCommentAccess } from "../middleware/authMiddleware.js";
 import { validateComment, validateId } from "../middleware/validators.js";
 import { handleValidation } from "../middleware/handleValidation.js";
 
@@ -9,12 +9,17 @@ const commentRouter = Router();
 commentRouter.patch('/:commentId',
   requireAuth,
   validateId,
-  canUpdateComment,
+  verfiyCommentAccess,
   validateComment,
   handleValidation,
   updateComment
 );
-// commentRouter.delete('/:id');
+commentRouter.delete('/:commentId',
+  requireAuth,
+  validateId,
+  verfiyCommentAccess,
+  deleteComment
+);
 
 
 export default commentRouter;

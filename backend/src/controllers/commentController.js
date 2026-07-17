@@ -49,3 +49,25 @@ export const updateComment = async (req, res) => {
     }
   }
 };
+
+export const deleteComment = async (req, res) => {
+  const commentId = parseInt(req.params.commentId);
+  try {
+    const deletedComment = await prisma.comment.delete({
+      where: { id: commentId },
+    });
+
+    res.json({
+      success: true,
+      message: 'Comment deleted.',
+      deletedPostId: deletedComment.id,
+    });
+  } catch (error) {
+    if (error.code === 'P2025') {
+      return res.status(404).json({ 
+        success: false, 
+        message: "Comment not found." 
+      });
+    }
+  } 
+};
