@@ -16,7 +16,6 @@
 }
 
 .menuButton {
-  border: 2px solid black;
   border-radius: 8px;
   padding: var(--space-s);
   background-color: unset;
@@ -27,4 +26,10 @@
   width: 24px;
   height: 24px;
   aspect-ratio: 1 / 1;
+}
+
+@media (min-width: 1024px) {
+  .menuButtonWrapper {
+    display: none;
+  }
 }

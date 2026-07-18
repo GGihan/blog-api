@@ -8,3 +8,9 @@ Fonts:
 Gelasio, designed by Eben Sorkin.
 
 Inter, designed by Rasmus Andersson
+
+Icons:
+
+https://fonts.google.com/icons
+
+https://pictogrammers.com/library/mdi/

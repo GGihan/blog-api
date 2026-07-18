@@ -1,13 +1,16 @@
 import './App.css'
 import { Outlet } from 'react-router';
+import { useState } from 'react';
 import Header from './components/Header/Header';
+import MainNav from './components/MainNav/MainNav';
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <div className='app-container'>
-      <Header />
-      <nav className='main-nav'>some links in main nab</nav>
+      <Header onMenuToggle={() => setIsMenuOpen(!isMenuOpen)} />
+      <MainNav isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       <main>
         <h2>some future content in main:</h2>
         <p>hello there!</p>

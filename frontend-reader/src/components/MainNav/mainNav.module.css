@@ -1,0 +1,68 @@
+.navContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100vh;
+  background-color: #a6a2a2;
+  z-index: 1000;
+  padding: var(--space-m);
+  
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in;
+
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-ui);
+}
+
+.navOpen {
+  transform: translateX(0);
+}
+
+.closeButtonWrapper {
+  display: flex;
+  justify-content: end;
+}
+
+.closeButton {
+  border-radius: 8px;
+  padding: var(--space-s);
+  background-color: unset;
+  border: none;
+}
+
+.closeImage {
+  width: 24px;
+  height: 24px;
+  aspect-ratio: 1 / 1;
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+}
+
+.menuItem {
+  padding: var(--space-s);
+}
+
+@media (min-width: 1024px) {
+  .navContainer {
+    position: static; 
+    width: auto;
+    height: auto;
+    transform: none;
+    transition: none;
+    background-color: unset;
+  }
+
+  .closeButton {
+    display: none;
+  }
+
+  .menuList {
+    flex-direction: row;
+  }
+}
