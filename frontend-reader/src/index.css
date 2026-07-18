@@ -7,7 +7,7 @@
 body,
 button {
   font-family: 
-    /* Add font */
+    'Gelasio',
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -20,6 +20,24 @@ button {
     'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+@font-face {
+  font-family: 'Gelasio';
+  src: url('/../assets/fonts/Gelasio-Regular.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/../assets/Inter-Regular.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 :root {
