@@ -1,0 +1,15 @@
+.headerContainer {
+  padding: var(--space-m);
+  height: 76px;
+  align-items: center;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1 / 1;
+}
+
+.headingOne {
+  margin-top: 2px;
+}
