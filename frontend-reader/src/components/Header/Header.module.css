@@ -1,6 +1,7 @@
 .headerContainer {
   padding: var(--space-m);
   height: 76px;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -11,5 +12,19 @@
 }
 
 .headingOne {
-  margin-top: 2px;
+  margin-top: 1px;
+}
+
+.menuButton {
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: var(--space-s);
+  background-color: unset;
+  border: none;
+}
+
+.menuImage {
+  width: 24px;
+  height: 24px;
+  aspect-ratio: 1 / 1;
 }
