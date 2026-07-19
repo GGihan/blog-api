@@ -4,8 +4,8 @@
   left: 0;
   width: 280px;
   height: 100vh;
-  background-color: #a6a2a2;
   z-index: 1000;
+  background-color: #a6a2a2;
   padding: var(--space-m);
   
   transform: translateX(-100%);

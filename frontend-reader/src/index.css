@@ -14,7 +14,7 @@ button {
 
 @font-face {
   font-family: 'Gelasio';
-  src: url('/../assets/fonts/Gelasio-Regular.woff2') format('woff2');
+  src: url('/assets/fonts/Gelasio-Regular.woff2') format('woff2');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -22,7 +22,7 @@ button {
 
 @font-face {
   font-family: 'Inter';
-  src: url('/../assets/Inter-Regular.woff2') format('woff2');
+  src: url('/assets/fonts/Inter-Regular.woff2') format('woff2');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;

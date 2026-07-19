@@ -1,5 +1,5 @@
 import Button from "../Button/Button";
-import styles from "./mainNav.module.css";
+import styles from "./MainNav.module.css";
 import close from "@/assets/images/close.svg";
 
 export default function MainNav({ isOpen, onClose }) {
@@ -22,9 +22,15 @@ export default function MainNav({ isOpen, onClose }) {
         </Button>
       </div>
       <ul className={styles.menuList}>
-        <li className={styles.menuItem}>Home</li>
-        <li className={styles.menuItem}>Login</li>
-        <li className={styles.menuItem}>Register</li>
+        <li className={styles.menuItem}>Home
+
+        </li>
+        <li className={styles.menuItem}>Login
+
+        </li>
+        <li className={styles.menuItem}>Register
+          
+        </li>
       </ul>
     </nav>
   );

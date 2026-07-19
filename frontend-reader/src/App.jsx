@@ -1,11 +1,13 @@
 import './App.css'
 import { Outlet } from 'react-router';
 import { useState } from 'react';
+// import { useAuth } from './hooks/useAuth';
 import Header from './components/Header/Header';
 import MainNav from './components/MainNav/MainNav';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const { isLoadingAuth } = useAuth();
 
   return (
     <div className='app-container'>
