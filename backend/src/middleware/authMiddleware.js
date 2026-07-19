@@ -19,7 +19,7 @@ export const requireAuth = (req, res, next) => {
     
     next();
   } catch {
-    return res.status(403).json({ 
+    return res.status(401).json({ 
       success: false, 
       message: 'Session expired or invalid token. Please log in.' 
     });

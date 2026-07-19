@@ -24,11 +24,38 @@ export const apiClient = async (endpoint, options = {}) => {
     headers,
   });
 
-  // Handle standard CORS or network dropouts cleanly
+  // Handle standard CORS, network and validation errors
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || 'API request failed');
+    // Clear token if expired, only on 401 expired/missing/bad token
+    if (response.status === 401) {
+      localStorage.removeItem(TOKEN_KEY);
+    }
+    throw new ApiError(
+      errorData.message || `Request failed with status ${response.status}`,
+      response.status,
+      errorData
+    );
   }
 
   return response.json();
 };
+
+export class ApiError extends Error {
+  constructor(message, status, data = {}) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+    this.errors = data.errors || [];
+    this.oldData = data.oldData || null;
+  }
+
+  // Instantly flattens express-validator errors array into a clean object
+  unwrapFieldErrors() {
+    const errorMap = {};
+    this.errors.forEach(err => {
+      if (err.field) errorMap[err.field] = err.message;
+    });
+    return errorMap; // Returns: { username: "Too short", email: "Invalid address" }
+  }
+}

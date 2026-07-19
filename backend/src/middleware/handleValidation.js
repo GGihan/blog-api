@@ -5,6 +5,8 @@ export const handleValidation = (req, res, next) => {
     field: path,
     message: msg
   }));
+  // Returns: { "field": "username", "message": "Too short" },
+  //          { "field": "email", "message": "Invalid address" }
 
   if (!errors.isEmpty()) {
     return res.status(400).json({

@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }) => {
         setUser(data.user);
       } catch (error) {
         console.warn("Auth validation failed:", error.message);
-        localStorage.removeItem(TOKEN_KEY);
         setUser(null);
       } finally {
         setIsLoadingAuth(false); 
