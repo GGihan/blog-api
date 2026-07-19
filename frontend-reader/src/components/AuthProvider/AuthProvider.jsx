@@ -1,5 +1,6 @@
 import { useState, useEffect, } from "react";
 import { AuthContext } from "@/hooks/useAuth";
+import { apiClient, TOKEN_KEY } from "@/config/api";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -7,30 +8,19 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     async function verifySession() {
-      const token = localStorage.getItem('engrave_token');
-      
+      const token = localStorage.getItem(TOKEN_KEY);
+      // If a token doesnt exist, dont make a request at all
       if (!token) {
         setIsLoadingAuth(false);
         return;
       }
 
       try {
-        const response = await fetch('http://localhost:8080/api/users/me', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          },
-        });
-
-        const data = await response.json(); 
-        if (!response.ok) {
-          throw new Error(data.message);
-        }
+        const data = await apiClient('/users/me'); 
         setUser(data.user);
       } catch (error) {
         console.warn("Auth validation failed:", error.message);
-        localStorage.removeItem('engrave_token');
+        localStorage.removeItem(TOKEN_KEY);
         setUser(null);
       } finally {
         setIsLoadingAuth(false); 
@@ -40,12 +30,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (userData, token) => {
-    localStorage.setItem('engrave_token', token);
+    localStorage.setItem(TOKEN_KEY, token);
     setUser(userData);
   };
 
   const logout = () => {
-    localStorage.removeItem('engrave_token');
+    localStorage.removeItem(TOKEN_KEY);
     setUser(null);
   };
 
