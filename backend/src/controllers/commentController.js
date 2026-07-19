@@ -26,7 +26,6 @@ export const createComment = async (req, res) => {
 
 export const updateComment = async (req, res) => {
   let { content } = matchedData(req);
-  const userId = req.user.id;
   const commentId = parseInt(req.params.commentId);
   try {
     const updatedComment = await prisma.comment.update({

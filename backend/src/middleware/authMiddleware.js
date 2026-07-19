@@ -18,7 +18,7 @@ export const requireAuth = (req, res, next) => {
     req.user = decodedPayload;
     
     next();
-  } catch (error) {
+  } catch {
     return res.status(403).json({ 
       success: false, 
       message: 'Session expired or invalid token. Please log in.' 
@@ -38,7 +38,7 @@ export const optionalAuth = (req, res, next) => {
     req.user = decodedPayload;
     
     next();
-  } catch (error) {
+  } catch {
     next();
   }
 };

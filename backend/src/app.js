@@ -1,9 +1,6 @@
 import 'dotenv/config';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import express from 'express';
-import { prisma } from '../lib/prisma.js';
-import bcrypt from 'bcryptjs';
+import cors from 'cors';
 import authRouter from './routes/authRouter.js';
 import userRouter from './routes/userRouter.js';
 import postRouter from './routes/postRouter.js';
