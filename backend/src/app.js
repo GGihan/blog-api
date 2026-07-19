@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
-import cors from 'cors';
+import { corsOptionsMiddleware } from './middleware/cors.js';
 import authRouter from './routes/authRouter.js';
 import userRouter from './routes/userRouter.js';
 import postRouter from './routes/postRouter.js';
@@ -8,6 +8,8 @@ import commentRouter from './routes/commentRouter.js';
 
 const app = express();
 
+// CORS middleware
+app.use(corsOptionsMiddleware);
 // Middleware for form and JSON data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
