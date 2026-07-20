@@ -1,12 +1,12 @@
 import styles from "./Button.module.css";
 
-export default function Button({ className, children, ...props }) {
+export default function Button({ className, type = "button", children, ...props }) {
   const combinedClassName = `${styles.baseButton} ${className || ""}`.trim();
 
   return (
     <button
       className={combinedClassName}
-      type="button"
+      type={type}
       {...props}
     >
       {children}

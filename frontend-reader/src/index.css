@@ -7,6 +7,10 @@
 body,
 button {
   font-family: var(--font-brand);
+  /* Forces numbers to be uniform height and equal width */
+  font-variant-numeric: lining-nums tabular-nums;
+  /* Fallback for older fonts/browsers */
+  font-feature-settings: "lnum" 1, "tnum" 1; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

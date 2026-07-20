@@ -1,0 +1,105 @@
+import styles from './Register.module.css';
+import { useForm } from 'react-hook-form';
+import { useAuth } from '@/hooks/useAuth';
+import { useNavigate } from 'react-router';
+import { apiClient } from '@/config/api';
+import Button from '../Button/Button';
+
+
+export default function Register() {
+  const { register, handleSubmit, setError, formState: { errors } } = useForm({
+    reValidateMode: 'onSubmit',
+  });
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmit = async (formData) => {
+    try {
+      const data = await apiClient('/auth/register', {
+        method: 'POST',
+        body: JSON.stringify(formData)
+      });
+      // Automatically login user on register
+      login(data.user, data.token);
+      navigate('/', { replace: true });
+    } catch (error) {
+      if (error.name === 'ApiError' && error.status === 400) {
+        // Get key-value dictionary from error helper
+        const fieldErrors = error.unwrapFieldErrors(); 
+        // Pass them to React Hook Form
+        Object.keys(fieldErrors).forEach((field) => {
+          setError(field, { type: 'server', message: fieldErrors[field] });
+        });
+        return;
+      }
+
+      if (error.name === 'ApiError') {
+        setError('root', {
+          type: 'server',
+          message: error.message,
+        });
+        return;
+      };
+    }
+  };
+
+  // Track individual errors so the errors get shown in the error container
+  const activeErrorMessages = [
+    errors.username?.message,
+    errors.password?.message,
+    errors.passwordConfirm?.message,
+  ].filter(Boolean);
+
+  return (
+    <div className={styles.resgisterContainer}>
+      <p>Register</p>
+      {activeErrorMessages.length > 0 && (
+        <div className={styles.errorContainer}>
+          <ul className={styles.errorList}>
+            {activeErrorMessages.map((message, index) => (
+              <li key={index} className={styles.errorItem}>
+                {message}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.registerForm}>
+        <div className={styles.formGroup}>
+          <label htmlFor="username">Username</label>
+          <input
+            id='username'
+            type='text'
+            {...register('username')}
+            placeholder="Username"
+          />
+        </div>
+
+        <div className={styles.formGroup}>
+          <label htmlFor="password">Password</label>
+          <input
+            id='password'
+            type='password'
+            {...register('password')}
+            placeholder="Choose password"
+          />
+        </div>
+
+        <div className={styles.formGroup}>
+          <label htmlFor="passwordConfirm">Confirm password</label>
+          <input
+            id='passwordConfirm'
+            type='password'
+            {...register('passwordConfirm')}
+            placeholder="Confirm password"
+          /> 
+        </div>
+
+        <Button className={styles.registerButton} type='submit'>
+          Register
+        </Button>
+      </form>
+    </div>
+  );
+};

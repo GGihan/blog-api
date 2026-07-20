@@ -1,4 +1,5 @@
 import App from "../../App";
+import Register from "../Register/Register";
 
 const routes = [
   {
@@ -15,6 +16,10 @@ const routes = [
         // element: < />,
       },
     ],
+  },
+  {
+    path: '/register',
+    element: <Register />
   },
   {
     // path: '/login',

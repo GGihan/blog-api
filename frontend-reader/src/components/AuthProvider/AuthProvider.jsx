@@ -2,7 +2,7 @@ import { useState, useEffect, } from "react";
 import { AuthContext } from "@/hooks/useAuth";
 import { apiClient, TOKEN_KEY } from "@/config/api";
 
-export const AuthProvider = ({ children }) => {
+export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoadingAuth, setIsLoadingAuth] = useState(true);
 

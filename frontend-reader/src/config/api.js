@@ -47,7 +47,6 @@ export class ApiError extends Error {
     this.name = 'ApiError';
     this.status = status;
     this.errors = data.errors || [];
-    this.oldData = data.oldData || null;
   }
 
   // Instantly flattens express-validator errors array into a clean object
@@ -58,4 +57,4 @@ export class ApiError extends Error {
     });
     return errorMap; // Returns: { username: "Too short", email: "Invalid address" }
   }
-}
+};
