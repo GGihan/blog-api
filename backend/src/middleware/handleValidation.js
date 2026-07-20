@@ -12,8 +12,7 @@ export const handleValidation = (req, res, next) => {
     return res.status(400).json({
       success: false,
       message: 'Validation failed.',
-      errors: errors.array(),
-      oldData: req.body, 
+      errors: errors.array(), 
     });
   }
 

@@ -28,10 +28,10 @@ export const validateRegister = [
   body('password')
     .notEmpty().withMessage(`Password ${emptyErr}`)
     .isLength({ min: 8, max: 72 }).withMessage(`Password ${passwordLengthErr}`),
-  // body('passwordConfirm')
-  //   .custom((value, {req}) => {
-  //     return value === req.body.password;
-  //   }).withMessage(`Passwords do not match.`),
+  body('passwordConfirm')
+    .custom((value, {req}) => {
+      return value === req.body.password;
+    }).withMessage(`Passwords do not match.`),
 ];
 
 export const validateLogIn = [
