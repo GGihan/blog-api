@@ -48,6 +48,7 @@ export default function Login() {
   const activeErrorMessages = [
     errors.username?.message,
     errors.password?.message,
+    errors.root?.message,
   ].filter(Boolean);
 
   return (
