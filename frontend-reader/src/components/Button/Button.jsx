@@ -1,7 +1,5 @@
-import styles from "./Button.module.css";
-
 export default function Button({ className, type = "button", children, ...props }) {
-  const combinedClassName = `${styles.baseButton} ${className || ""}`.trim();
+  const combinedClassName = `${className || ""}`.trim();
 
   return (
     <button

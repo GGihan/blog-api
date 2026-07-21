@@ -15,7 +15,7 @@ function App() {
       <MainNav isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       {!isLoadingAuth && (<main>
         <h2>some future content in main:</h2>
-        <p>hello there, {user.username}!</p>
+        <p>hello there, {user?.username}!</p>
         <Outlet />
       </main>)}
       <footer>some text footer</footer>

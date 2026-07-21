@@ -5,7 +5,7 @@
   width: 280px;
   height: 100vh;
   z-index: 1000;
-  background-color: #a6a2a2;
+  background-color: var(--color-ui-light);
   padding: var(--space-m);
   
   transform: translateX(-100%);
@@ -27,9 +27,6 @@
 
 .closeButton {
   border-radius: 8px;
-  padding: var(--space-s);
-  background-color: unset;
-  border: none;
 }
 
 .closeImage {

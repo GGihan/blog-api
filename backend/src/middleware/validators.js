@@ -16,6 +16,7 @@ export const validateRegister = [
   body('username')
     .trim()
     .notEmpty().withMessage(`Username ${emptyErr}`)
+    .bail()
     .isLength({ min: 3, max: 30 }).withMessage(`Username ${usernameLengthErr}`)
     .matches(/^[a-zA-Z0-9_-]+$/).withMessage(`Username ${symbolErr}`)
     // Check if username already exists
@@ -27,6 +28,7 @@ export const validateRegister = [
     }),
   body('password')
     .notEmpty().withMessage(`Password ${emptyErr}`)
+    .bail()
     .isLength({ min: 8, max: 72 }).withMessage(`Password ${passwordLengthErr}`),
   body('passwordConfirm')
     .custom((value, {req}) => {
@@ -46,10 +48,12 @@ export const validateCreatePost = [
   body('title')
     .trim()
     .notEmpty().withMessage(`Title ${emptyErr}`)
+    .bail()
     .isLength({ min: 3, max: 50 }).withMessage(`Title ${titleLengthErr}`),
   body('content')
     .trim()
     .notEmpty().withMessage(`Content ${emptyErr}`)
+    .bail()
     .isLength({ min: 10, max: 1000 }).withMessage(`Content ${postContentLengthErr}`),
   body('published')
     .optional()

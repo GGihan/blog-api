@@ -4,7 +4,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useNavigate } from 'react-router';
 import { apiClient } from '@/config/api';
 import Button from '../Button/Button';
-
+import arrowLeft from '@/assets/images/arrow-left.svg';
 
 export default function Register() {
   const { register, handleSubmit, setError, formState: { errors } } = useForm({
@@ -52,20 +52,20 @@ export default function Register() {
   ].filter(Boolean);
 
   return (
-    <div className={styles.resgisterContainer}>
-      <p>Register</p>
+    <div className={`${styles.registerContainer} flex-column`}>
+      <h1 className={styles.registerTitle}>Register</h1>
       {activeErrorMessages.length > 0 && (
         <div className={styles.errorContainer}>
-          <ul className={styles.errorList}>
+          <ul className={`${styles.errorList} flex-column`}>
             {activeErrorMessages.map((message, index) => (
-              <li key={index} className={styles.errorItem}>
+              <li key={index} className={`${styles.errorItem} error-message`}>
                 {message}
               </li>
             ))}
           </ul>
         </div>
       )}
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.registerForm}>
+      <form onSubmit={handleSubmit(onSubmit)} className={`${styles.registerForm} flex-column`}>
         <div className={styles.formGroup}>
           <label htmlFor="username">Username</label>
           <input
@@ -96,10 +96,26 @@ export default function Register() {
           /> 
         </div>
 
-        <Button className={styles.registerButton} type='submit'>
-          Register
-        </Button>
+        <div className={`${styles.buttonContainer} flex-row`}>
+          <Button
+            className={styles.returnButton}
+            onClick={() => navigate('/', { replace: true })}
+          >
+            <img
+              className={styles.returnImage}
+              src={arrowLeft}
+              alt=""
+              width='24'
+              height='24'
+            />
+            Return
+          </Button>
+          <Button className={styles.registerButton} type='submit'>
+            Register
+          </Button>
+        </div>
       </form>
+      <hr></hr>
     </div>
   );
 };

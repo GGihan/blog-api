@@ -17,9 +17,6 @@
 
 .menuButton {
   border-radius: 8px;
-  padding: var(--space-s);
-  background-color: unset;
-  border: none;
 }
 
 .menuImage {
