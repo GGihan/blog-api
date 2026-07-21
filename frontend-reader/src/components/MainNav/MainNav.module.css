@@ -50,7 +50,7 @@
 .logoutButton {
   display: flex;
   align-items: center;
-  padding: var(--space-s);
+  padding: var(--space-s) 0;
   gap: var(--space-m);
   font-size: 1.25rem;
   border-radius: var(--space-m);

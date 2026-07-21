@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
+import { NavLink } from "react-router";
 import Button from "../Button/Button";
 import styles from "./MainNav.module.css";
 import close from "@/assets/images/close.svg";
@@ -30,7 +31,7 @@ export default function MainNav({ isOpen, onClose }) {
       </div>
       <ul className={styles.menuList}>
         <li className={styles.menuItem}>
-          <a href="/" className={`${styles.linkGroup}`}>
+          <NavLink to="/" className={`${styles.linkGroup}`}>
             <img
               className={styles.linkIcon}
               src={home}
@@ -40,12 +41,12 @@ export default function MainNav({ isOpen, onClose }) {
               aria-hidden="true"
             />
             <p className={styles.linkText}>Home</p>
-          </a>
+          </NavLink>
         </li>
         {!user ? (
           <>
             <li className={styles.menuItem}>
-              <a href="/register" className={`${styles.linkGroup}`}>
+              <NavLink to="/register" className={`${styles.linkGroup}`}>
                 <img
                   className={styles.linkIcon}
                   src={register}
@@ -55,10 +56,10 @@ export default function MainNav({ isOpen, onClose }) {
                   aria-hidden="true"
                 />
                 <p className={styles.linkText}>Register</p>
-              </a>
+              </NavLink>
             </li>
             <li className={styles.menuItem}>
-              <a href="/login" className={`${styles.linkGroup}`}>
+              <NavLink to="/login" className={`${styles.linkGroup}`}>
                 <img
                   className={styles.linkIcon}
                   src={login}
@@ -68,7 +69,7 @@ export default function MainNav({ isOpen, onClose }) {
                   aria-hidden="true"
                 />
                 <p className={styles.linkText}>Login</p>
-              </a>
+              </NavLink>
             </li>
           </>
         ) : (

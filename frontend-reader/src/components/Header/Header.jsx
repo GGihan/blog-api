@@ -2,12 +2,13 @@ import styles from "./Header.module.css";
 import Button from "../Button/Button";
 import logo from "@/assets/images/logo.svg";
 import menu from "@/assets/images/menu.svg";
+import { Link } from "react-router";
 
 export default function Header({ onMenuToggle }) {
 
   return (
     <header className={`${styles.headerContainer} flex-row`}>
-      <a href="/" className="flex-row">
+      <Link to="/" className="flex-row">
         <img
           className={styles.logo}
           src={logo}
@@ -17,7 +18,7 @@ export default function Header({ onMenuToggle }) {
           aria-hidden="true"
         />
         <h1 className={styles.headingOne}>NGRAVE</h1>
-      </a>
+      </Link>
       <div className={styles.menuButtonWrapper}>
         <Button
           className={styles.menuButton}
