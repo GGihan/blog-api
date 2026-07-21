@@ -1,3 +1,7 @@
+.desktopDisplay {
+  display: none;
+}
+
 .registerContainer {
   padding: var(--space-m);
   gap: var(--space-m);
@@ -59,4 +63,62 @@
 
 .registerButton:hover {
   background-color: var(--color-ui-very-dark);
+}
+
+@media (min-width: 800px) {
+  .fullDisplay {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(
+      100deg, 
+      var(--color-ui-light) 39.9%, 
+      var(--color-white) 40.1%
+    );
+  }
+  
+  .desktopDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    flex: 1;
+    padding: var(--space-xxl) var(--space-xxl) 200px var(--space-xxl);
+  }
+
+  .mobileDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 2;
+  }
+
+  .registerContainer {
+    max-width: 700px;
+    min-height: 600px;
+    padding: var(--space-xxl);
+  }
+
+  .sideText {
+    color: white;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sideTitle {
+    font-size: 2.75rem;
+  }
+
+  .sideText {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1350px) {
+  .sideTitle {
+    font-size: 3.75rem;
+  }
+
+  .sideText {
+    font-size: 1.75rem;
+  }
 }

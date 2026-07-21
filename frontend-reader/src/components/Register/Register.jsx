@@ -52,70 +52,79 @@ export default function Register() {
   ].filter(Boolean);
 
   return (
-    <div className={`${styles.registerContainer} flex-column`}>
-      <h1 className={styles.registerTitle}>Register</h1>
-      {activeErrorMessages.length > 0 && (
-        <div className={styles.errorContainer}>
-          <ul className={`${styles.errorList} flex-column`}>
-            {activeErrorMessages.map((message, index) => (
-              <li key={index} className={`${styles.errorItem} error-message`}>
-                {message}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <form onSubmit={handleSubmit(onSubmit)} className={`${styles.registerForm} flex-column`}>
-        <div className={styles.formGroup}>
-          <label htmlFor="username">Username</label>
-          <input
-            id='username'
-            type='text'
-            {...register('username')}
-            placeholder="Username"
-          />
-        </div>
+    <div className={styles.fullDisplay}>
+      <div className={styles.desktopDisplay}>
+        <h1 className={styles.sideTitle}>Create account</h1>
+        <p className={styles.sideText}>Join the Engrave community!</p>
+      </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="password">Password</label>
-          <input
-            id='password'
-            type='password'
-            {...register('password')}
-            placeholder="Choose password"
-          />
-        </div>
+      <div className={styles.mobileDisplay}>
+        <div className={`${styles.registerContainer} flex-column`}>
+          <h1 className={styles.registerTitle}>Register</h1>
+          {activeErrorMessages.length > 0 && (
+            <div className={styles.errorContainer}>
+              <ul className={`${styles.errorList} flex-column`}>
+                {activeErrorMessages.map((message, index) => (
+                  <li key={index} className={`${styles.errorItem} error-message`}>
+                    {message}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <form onSubmit={handleSubmit(onSubmit)} className={`${styles.registerForm} flex-column`}>
+            <div className={styles.formGroup}>
+              <label htmlFor="username">Username</label>
+              <input
+                id='username'
+                type='text'
+                {...register('username')}
+                placeholder="Username"
+              />
+            </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="passwordConfirm">Confirm password</label>
-          <input
-            id='passwordConfirm'
-            type='password'
-            {...register('passwordConfirm')}
-            placeholder="Confirm password"
-          /> 
-        </div>
+            <div className={styles.formGroup}>
+              <label htmlFor="password">Password</label>
+              <input
+                id='password'
+                type='password'
+                {...register('password')}
+                placeholder="Choose password"
+              />
+            </div>
 
-        <div className={`${styles.buttonContainer} flex-row`}>
-          <Button
-            className={styles.returnButton}
-            onClick={() => navigate('/', { replace: true })}
-          >
-            <img
-              className={styles.returnImage}
-              src={arrowLeft}
-              alt=""
-              width='24'
-              height='24'
-            />
-            Return
-          </Button>
-          <Button className={styles.registerButton} type='submit'>
-            Register
-          </Button>
+            <div className={styles.formGroup}>
+              <label htmlFor="passwordConfirm">Confirm password</label>
+              <input
+                id='passwordConfirm'
+                type='password'
+                {...register('passwordConfirm')}
+                placeholder="Confirm password"
+              /> 
+            </div>
+
+            <div className={`${styles.buttonContainer} flex-row`}>
+              <Button
+                className={styles.returnButton}
+                onClick={() => navigate('/', { replace: true })}
+              >
+                <img
+                  className={styles.returnImage}
+                  src={arrowLeft}
+                  alt=""
+                  width='24'
+                  height='24'
+                />
+                Return
+              </Button>
+              <Button className={styles.registerButton} type='submit'>
+                Register
+              </Button>
+            </div>
+          </form>
+          <hr></hr>
         </div>
-      </form>
-      <hr></hr>
+      </div>
     </div>
   );
 };
