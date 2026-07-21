@@ -1,5 +1,6 @@
 import App from "../../App";
 import Register from "../Register/Register";
+import Login from "../Login/Login";
 
 const routes = [
   {
@@ -22,8 +23,8 @@ const routes = [
     element: <Register />
   },
   {
-    // path: '/login',
-    // element: <Login />,
+    path: '/login',
+    element: <Login />,
     // errorElement: < />,
   },
 ];
