@@ -1,12 +1,13 @@
 import App from "../../App";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import ErrorPage from "../ErrorPage/Errorpage";
 
 const routes = [
   {
     path: '/',
     element: <App />,
-    // errorElement: < />,
+    errorElement: <ErrorPage />,
     children: [
       {
         // index: true,
@@ -20,12 +21,13 @@ const routes = [
   },
   {
     path: '/register',
-    element: <Register />
+    element: <Register />,
+    errorElement: <ErrorPage />,
   },
   {
     path: '/login',
     element: <Login />,
-    // errorElement: < />,
+    errorElement: <ErrorPage />,
   },
 ];
 
