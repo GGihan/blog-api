@@ -14,6 +14,7 @@
   display: flex;
   flex-direction: column;
   font-family: var(--font-ui);
+  border-right: 2px solid black;
 }
 
 .navOpen {
@@ -42,7 +43,32 @@
 }
 
 .menuItem {
+ border-bottom: 1px solid black;
+}
+
+.linkGroup,
+.logoutButton {
+  display: flex;
+  align-items: center;
   padding: var(--space-s);
+  gap: var(--space-m);
+  font-size: 1.25rem;
+  border-radius: var(--space-m);
+}
+
+.linkIcon {
+  width: 30px;
+  height: 30px;
+  aspect-ratio: 1 / 1;
+}
+
+.logoutButton {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.logoutButton:hover {
+  background-color: unset;
 }
 
 @media (min-width: 1024px) {
@@ -62,4 +88,13 @@
   .menuList {
     flex-direction: row;
   }
+
+  .menuItem {
+    border-bottom: unset;
+  }
+
+  /* .menuItem:hover {
+    background-color: var(--color-ui-light);
+    border-radius: var(--space-s);
+  } */
 }
