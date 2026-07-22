@@ -1,0 +1,32 @@
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-m);
+  font-family: var(--font-ui);
+  background-color: var(--color-ui-light);
+}
+
+.socialsList {
+  gap: var(--space-m)
+}
+
+.socialsIcon {
+  width: 30px;
+  height: 30px;
+  aspect-ratio: 1 / 1;
+}
+
+.socialsLink {
+  display: flex;
+  padding: var(--space-s);
+  border-radius: var(--space-s);
+}
+
+.socialsLink:hover {
+  background-color: var(--color-ui-very-light);
+}
+
+.socialsLink:focus-visible {
+  outline: 2px solid var(--color-ui-very-dark);
+}
