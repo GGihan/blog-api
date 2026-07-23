@@ -1,5 +1,9 @@
 import { prisma } from "../../lib/prisma.js";
 import { matchedData } from 'express-validator';
+import { supabase } from "../../lib/supabase.js";
+
+// Storage
+const bucketName = 'blog-media';
 
 // Controls
 export const getAllPosts = async (req, res) => {
@@ -95,12 +99,39 @@ export const getPostById = async (req, res) => {
 export const createPost = async (req, res) => {
   let { title, content, published } = matchedData(req);
   const userId = req.user.id;
+  let imageUrl = null;
+
+  if (req.file) {
+    const file = req.file;
+    const fileExt = file.originalname.split('.').pop();
+    const fileName = `${crypto.randomUUID()}.${fileExt}`;
+    const filePath = `${userId}/post-images/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from(bucketName)
+      .upload(filePath, file.buffer, {
+        contentType: file.mimetype,
+        upsert: false,
+      });
+
+    if (uploadError) {
+      throw new Error(`Supabase Storage Error: ${uploadError.message}`);
+    }
+
+    const { data: urlData } = supabase.storage
+      .from(bucketName)
+      .getPublicUrl(filePath);
+
+    imageUrl = urlData.publicUrl;
+  }
+
   const newPost = await prisma.post.create({
     data: {
       title,
       content,
       published,
       userId,
+      imageUrl,
     },
     include: {
       user: {

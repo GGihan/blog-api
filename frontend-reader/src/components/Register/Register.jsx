@@ -18,7 +18,7 @@ export default function Register() {
     try {
       const data = await apiClient('/auth/register', {
         method: 'POST',
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
       // Automatically login user on register
       login(data.user, data.token);
@@ -49,6 +49,7 @@ export default function Register() {
     errors.username?.message,
     errors.password?.message,
     errors.passwordConfirm?.message,
+    errors.root?.message,
   ].filter(Boolean);
 
   return (

@@ -6,9 +6,18 @@ export const apiClient = async (endpoint, options = {}) => {
 
   // Prepare standard headers
   const headers = {
-    'Content-Type': 'application/json',
     ...options.headers, // Merges custom headers passed into the function call
   };
+
+  // Default to JSON for standard payloads
+  if (!headers['Content-Type']) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  // Let the browser automatically generate the boundary header for FormData
+  if (options.body instanceof FormData) {
+    delete headers['Content-Type'];
+  }
 
   // Automatically attach your authorization token if it exists
   if (token) {
@@ -19,20 +28,21 @@ export const apiClient = async (endpoint, options = {}) => {
   const url = `${BASE_URL}${endpoint}`;
 
   const response = await fetch(url, {
-    medthod: 'GET',
+    method: 'GET',
     ...options,
     headers,
   });
 
   // Handle standard CORS, network and validation errors
   if (!response.ok) {
+    // errorData = { success: false, message: "Error message" }
     const errorData = await response.json().catch(() => ({}));
     // Clear token if expired, only on 401 expired/missing/bad token
     if (response.status === 401) {
       localStorage.removeItem(TOKEN_KEY);
     }
     throw new ApiError(
-      errorData.message || `Request failed with status ${response.status}`,
+      errorData.message,
       response.status,
       errorData
     );

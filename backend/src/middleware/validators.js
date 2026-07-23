@@ -57,6 +57,7 @@ export const validateCreatePost = [
     .isLength({ min: 10, max: 1000 }).withMessage(`Content ${postContentLengthErr}`),
   body('published')
     .optional()
+    .toBoolean()
     .isBoolean().withMessage(`Published ${booleanErr}`),
 ];
 
@@ -73,6 +74,7 @@ export const validateUpdatePost = [
     .isLength({ min: 10, max: 1000 }).withMessage(`Content ${postContentLengthErr}`),
   body('published')
     .optional()
+    .toBoolean()
     .isBoolean().withMessage(`Published ${booleanErr}`),
 ];
 

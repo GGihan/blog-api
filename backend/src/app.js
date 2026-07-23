@@ -30,11 +30,13 @@ app.get('*path', (req, res) => {
 
 // Global error handler
 app.use((err, req, res, next) => {
+  // Development only
   console.error('Server Error:', err.stack);
   const statusCode = err.statusCode || 500;
+  const message = err.message || 'An unexpected error occurred on the server.';
   res.status(statusCode).json({
     success: false,
-    message: 'An unexpected error occurred on the server.'
+    message: message,
   });
 });
 

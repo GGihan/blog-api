@@ -2,6 +2,7 @@ import App from "../../App";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import ErrorPage from "../ErrorPage/Errorpage";
+import NewPost from "../NewPost/NewPost";
 
 const routes = [
   {
@@ -14,8 +15,8 @@ const routes = [
         // element: < />,
       },
       {
-        // path: ,
-        // element: < />,
+        path: 'newPost',
+        element: <NewPost />,
       },
     ],
   },
