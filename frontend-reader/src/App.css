@@ -9,6 +9,8 @@ header {
 main {
   grid-area: main;
   min-width: 0;
+  display: flex;
+  justify-content: center;
 }
 
 footer {

@@ -5,10 +5,13 @@ import { useAuth } from './hooks/useAuth';
 import Header from './components/Header/Header';
 import MainNav from './components/MainNav/MainNav';
 import Footer from './components/Footer/Footer';
+import Post from './components/Post/Post';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, isLoadingAuth } = useAuth();
+  const { isLoadingAuth } = useAuth();
+
+  // Add all post fetching
 
   return (
     <div className='app-container'>
@@ -17,8 +20,7 @@ function App() {
         <>
           <MainNav isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
           <main>
-            {/* <h2>some future content in main:</h2>
-            <p>hello there, {user?.username}!</p> */}
+            <Post postId={27} />
             <Outlet />
           </main>
         </>

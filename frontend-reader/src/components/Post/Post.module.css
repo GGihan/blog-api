@@ -1,0 +1,19 @@
+.postContainer {
+  flex: 1;
+  align-items: center;
+  max-width: 1000px;
+}
+
+/* .imageContainer {
+  width: 100%;
+  max-width: 95%;
+  height: 850px; 
+  overflow: hidden;
+}
+
+.postImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+} */

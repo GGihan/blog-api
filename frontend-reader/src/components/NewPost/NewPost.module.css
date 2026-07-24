@@ -1,4 +1,5 @@
 .postContainer {
+  flex: 1;
   padding: var(--space-m);
   gap: var(--space-m);
 }
@@ -64,6 +65,7 @@
 
 @media (min-width: 1024px) {
   .postContainer {
+    flex: unset;
     gap: var(--space-xl);
   }
 
@@ -97,5 +99,9 @@
   .formGroupCheckbox,
   .postButton {
     width: 500px;
+  }
+
+  .postButton {
+    margin-top: 235px;
   }
 }
