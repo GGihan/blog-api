@@ -1,12 +1,19 @@
 import { apiClient } from "@/config/api";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import Button from "../Button/Button";
 import styles from "./NewPost.module.css";
 
 export default function NewPost() {
-  const { register, handleSubmit, setError, formState: { errors } } = useForm({
-      reValidateMode: 'onSubmit',
-    });
+  const { register, handleSubmit, setError, control, formState: { errors } } = useForm({
+    reValidateMode: 'onSubmit',
+  });
+
+  const contentValue = useWatch({
+    control,
+    name: 'content',
+    defaultValue: '',
+  });
+  const maxContentLength = 1000;
 
   const onSubmit = async (data) => {
     try {
@@ -56,7 +63,8 @@ export default function NewPost() {
   ].filter(Boolean);
 
   return (
-    <div className={styles.postContainer}>
+    <div className={`${styles.postContainer} flex-column`}>
+      <h1 className={styles.pageTitle}>Create new post</h1>
       {activeErrorMessages.length > 0 && (
         <div className={styles.errorContainer}>
           <ul className={`${styles.errorList} flex-column`}>
@@ -70,26 +78,32 @@ export default function NewPost() {
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className={`${styles.postForm} flex-column`}>
-        <div className={styles.formGroup}>
+        <div className={`${styles.formGroup} ${styles.titleGroup}`}>
           <label htmlFor="title">Title</label>
           <input
             id='title'
             type='text'
             {...register('title')}
             placeholder="Title"
+            maxLength={50}
           />
         </div>
 
-        <div className={styles.formGroup}>
+        <div className={`${styles.formGroup} ${styles.contentGroup}`}>
           <label htmlFor="content">Content</label>
           <textarea
             id='content'
+            className={styles.textarea}
             {...register('content')}
             placeholder="Some content for the post..."
+            maxLength={maxContentLength}
           />
+          <div className={styles.characterCount}>
+            {contentValue.length} / {maxContentLength}
+          </div>
         </div>
 
-        <div className={styles.formGroup}>
+        <div className={`${styles.formGroup} ${styles.fileGroup}`}>
           <label htmlFor="file">Post image</label>
           <input
             id='file'
@@ -105,10 +119,11 @@ export default function NewPost() {
           />
         </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="published">Publish post</label>
+        <div className={styles.formGroupCheckbox}>
+          <label htmlFor="published">Publish</label>
           <input
             id="published"
+            className={styles.checkbox}
             type="checkbox"
             {...register('published')}
           />

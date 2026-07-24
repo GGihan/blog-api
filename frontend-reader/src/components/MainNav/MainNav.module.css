@@ -78,7 +78,8 @@
     height: auto;
     transform: none;
     transition: none;
-    background-color: unset;
+    /* background-color: unset; */
+    border-right: unset;
   }
 
   .closeButton {
@@ -91,10 +92,17 @@
 
   .menuItem {
     border-bottom: unset;
+    padding-right: var(--space-m);
+    border-right: 2px solid black;
   }
 
-  /* .menuItem:hover {
-    background-color: var(--color-ui-light);
-    border-radius: var(--space-s);
-  } */
+  .menuItem:hover {
+    border-radius: var(--space-m);
+    background-color: var(--color-ui-very-light); 
+  }
+
+  .linkGroup,
+  .logoutButton {
+    font-size: 1rem;
+  }
 }

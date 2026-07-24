@@ -17,8 +17,8 @@ function App() {
         <>
           <MainNav isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
           <main>
-            <h2>some future content in main:</h2>
-            <p>hello there, {user?.username}!</p>
+            {/* <h2>some future content in main:</h2>
+            <p>hello there, {user?.username}!</p> */}
             <Outlet />
           </main>
         </>
