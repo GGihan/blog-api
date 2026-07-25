@@ -87,6 +87,7 @@ a {
   color: unset;
   /* Removes blue rectangle when link is pressed */
   -webkit-tap-highlight-color: transparent;
+  outline: 1px solid transparent;
 }
 
 .flex-row {
@@ -122,11 +123,19 @@ button {
   border: none;
 }
 
-button:hover {
-  background-color: var(--color-ui-very-light);
+@media (hover: hover) {
+  button:hover {
+    background-color: var(--color-ui-very-dark);
+  }
+
+  input:not(:disabled):not(:focus):not(:active):hover,
+  textarea:not(:disabled):not(:focus):not(:active):hover {
+    outline: 1px solid var(--color-gray-light);
+  }
 }
 
-button:focus-visible {
+button:focus-visible,
+a:focus-visible {
   outline: 2px solid var(--color-ui-very-dark);
 }
 
@@ -138,10 +147,6 @@ textarea {
   border-radius: 8px;
 }
 
-input:hover,
-textarea:hover {
-  outline: 1px solid var(--color-gray-light);
-}
 
 input:focus-visible,
 input:active,

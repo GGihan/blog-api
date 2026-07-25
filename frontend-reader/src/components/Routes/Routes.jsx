@@ -3,6 +3,8 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import ErrorPage from "../ErrorPage/Errorpage";
 import NewPost from "../NewPost/NewPost";
+import PostList from "../PostList/PostList";
+import FullPost from "../Post/FullPost";
 
 const routes = [
   {
@@ -11,8 +13,8 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       {
-        // index: true,
-        // element: < />,
+        index: true,
+        element: <PostList />,
       },
       {
         path: 'posts',
@@ -22,8 +24,8 @@ const routes = [
             element: <NewPost />, // Route: /posts/new
           },
           {
-            // path: ':id',
-            // element: < />, // Route: /posts/123
+            path: ':postId',
+            element: <FullPost />, // Route: /posts/123
           },
         ],
       },

@@ -7,11 +7,13 @@ import Button from "../Button/Button";
 // import deleteIcon from "@/assets/images/delete.svg";
 import useSWR from "swr";
 import Comment from "../Comment/Comment";
+import { useParams } from "react-router";
 
 // Fetch helper function for useSWR, sets data to post object immediately
 const fetcher = (url) => apiClient(url).then(res => res.post);
 
-export default function Post({ postId }) {
+export default function FullPost() {
+  const { postId } = useParams()
   // useSWR handles data, error and loading state, automatically refetches data on 4 conditions
   const {
     data: post,

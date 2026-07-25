@@ -1,0 +1,23 @@
+.paginationContainer {
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-xs);
+  background-color: var(--color-ui-light);
+  border-radius: var(--space-m);
+}
+
+.pageButton {
+  color: var(--color-white);
+  background-color: var(--color-ui-dark);
+  padding: var(--space-s) var(--space-m);
+  border-radius: var(--space-m);
+  width: 100px;
+}
+
+.pageButton:active {
+  transform: scale(0.95);
+} 
+
+.disabledContainer {
+  width: 100px;
+}

@@ -20,7 +20,7 @@ function App() {
         <>
           <MainNav isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
           <main>
-            <Post postId={31} />
+            {/* <Post postId={31} /> */}
             <Outlet />
           </main>
         </>

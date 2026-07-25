@@ -28,7 +28,7 @@ export default function NewPost() {
         formData.append('file', data.file[0]); 
       }
 
-      const responseData = await apiClient('/posts', {
+      await apiClient('/posts', {
         method: 'POST',
         body: formData,
       });
