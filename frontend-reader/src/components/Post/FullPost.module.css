@@ -1,0 +1,98 @@
+.postContainer {
+  flex: 1;
+  max-width: 700px;
+  padding: var(--space-m);
+  gap: var(--space-m);
+  background-color: var(--color-gray-alot-light)
+}
+
+.imageContainer {
+  width: 100%;
+  max-height: 800px;
+}
+
+.postImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: 2px solid black;
+  border-radius: var(--space-m)
+}
+
+.articleContainer {
+  gap: var(--space-m);
+}
+
+.postTitle {
+  padding-bottom: var(--space-l);
+  border-bottom: 2px solid black;
+}
+
+.contentContainer {
+  min-height: 300px;
+  padding: var(--space-s);
+  border-radius: var(--space-s);
+  
+}
+
+.infoContainer {
+  align-items: flex-end;
+  padding: var(--space-m) 0;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  color: var(--color-gray-dark);
+}
+
+.addCommentContainer {
+  gap: var(--space-m);
+}
+
+.errorList {
+  gap: var(--space-s);
+}
+
+.errorItem {
+  padding: var(--space-s);
+  border: 1px solid red;
+  border-radius: var(--space-s);
+}
+
+.commentForm {
+  gap: var(--space-s);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.textarea {
+  resize: none;
+  min-height: 150px;
+}
+
+.characterCount {
+  align-self: flex-end;
+}
+
+.commentButton {
+  color: var(--color-white);
+  background-color: var(--color-ui-dark);
+  padding: var(--space-s) var(--space-m);
+  border-radius: var(--space-m);
+  max-width: 150px;
+  align-self: flex-end;
+}
+
+.commentButton:hover {
+  background-color: var(--color-ui-very-dark);
+}
+
+.commentButton:active {
+  transform: scale(0.95);
+}
+
+.allCommentsContainer {
+  gap: var(--space-m);
+}

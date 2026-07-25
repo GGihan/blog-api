@@ -1,11 +1,12 @@
-import styles from "./Post.module.css";
+import styles from "./FullPost.module.css";
 import { format } from 'date-fns';
 import { useWatch, useForm } from "react-hook-form";
 import { apiClient } from "@/config/api";
 import Button from "../Button/Button";
-import edit from "@/assets/images/edit.svg";
-import deleteIcon from "@/assets/images/delete.svg";
+// import edit from "@/assets/images/edit.svg";
+// import deleteIcon from "@/assets/images/delete.svg";
 import useSWR from "swr";
+import Comment from "../Comment/Comment";
 
 // Fetch helper function for useSWR, sets data to post object immediately
 const fetcher = (url) => apiClient(url).then(res => res.post);
@@ -19,7 +20,10 @@ export default function Post({ postId }) {
     mutate: refetchPost
   } = useSWR(`/posts/${postId}`, fetcher, { revalidateOnFocus: false, }); // disable refetch on tab switching
 
-  const { register, handleSubmit, setError, control, reset, formState: { errors } } = useForm({
+  const { register, handleSubmit, setError, control, resetField, formState: { errors } } = useForm({
+    defaultValues: {
+      content: '',
+    },
     reValidateMode: 'onSubmit',
   });
 
@@ -29,7 +33,7 @@ export default function Post({ postId }) {
         method: 'POST',
         body: JSON.stringify(commentData),
       });
-      reset();
+      resetField('content');
       await refetchPost();
     } catch (error) {
       if (error.name === 'ApiError' && error.status === 400) {
@@ -82,20 +86,20 @@ export default function Post({ postId }) {
           />
         </div>
       )}
-      <div className={styles.articleContainer}>
+      <div className={`${styles.articleContainer} flex-column`}>
         <h1 className={styles.postTitle}>{post.title}</h1>
         <div className={styles.contentContainer}>
           <p>{post.content}</p>
         </div>
-        <div>
-          <div className={styles.infoContainer}>
+        <div >
+          <div className={`${styles.infoContainer} flex-column`}>
             <p className={styles.postAuthor}>Created by {post.user?.username}</p>
             <p className={styles.postDate}>On {formattedPostDate}</p>
           </div>
-          <div className={styles.controlsContainer}>
+          {/* <div className={styles.controlsContainer}>
             <Button
               className={styles.editButton}
-              // onClick={handleEditClick}
+              onClick={handleEditClick}
             >
               <img
                 className={styles.editImage}
@@ -108,7 +112,7 @@ export default function Post({ postId }) {
             </Button>
             <Button
               className={styles.deleteButton}
-              // onClick={handleDeleteClick}
+              onClick={handleDeleteClick}
             >
               <img
                 className={styles.deleteImage}
@@ -119,11 +123,10 @@ export default function Post({ postId }) {
               />
               Delete
             </Button>
-          </div>
+          </div> */}
         </div>
-        
       </div>
-      <div className={styles.addCommentContainer}>
+      <div className={`${styles.addCommentContainer} flex-column`}>
         {activeErrorMessages.length > 0 && (
           <div className={styles.errorContainer}>
             <ul className={`${styles.errorList} flex-column`}>
@@ -135,7 +138,7 @@ export default function Post({ postId }) {
             </ul>
           </div>
         )}
-        <form onSubmit={handleSubmit(onCommentSubmit)} className={styles.commentForm}>
+        <form onSubmit={handleSubmit(onCommentSubmit)} className={`${styles.commentForm} flex-column`}>
           <div className={styles.formGroup}>
             <label htmlFor="content">Add comment</label>
             <textarea
@@ -155,8 +158,16 @@ export default function Post({ postId }) {
           </Button>
         </form>
       </div>
-      <div className={styles.allCommentsContainer}>
-        {/* Add for each Comment in Post.comments a Comment Container */}
+      <h2>Comments:</h2>
+
+      <div className={`${styles.allCommentsContainer} flex-column`}>
+        {post.comments?.length > 0 ? (
+          post.comments.map((comment) => (
+            <Comment key={comment.id} comment={comment} />
+          )) 
+        ) : (
+          <p>No comments yet. Be the first to comment!</p>
+        )}
       </div>
     </div>
   );

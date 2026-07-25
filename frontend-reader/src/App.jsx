@@ -5,7 +5,7 @@ import { useAuth } from './hooks/useAuth';
 import Header from './components/Header/Header';
 import MainNav from './components/MainNav/MainNav';
 import Footer from './components/Footer/Footer';
-import Post from './components/Post/Post';
+import Post from './components/Post/FullPost';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,7 +20,7 @@ function App() {
         <>
           <MainNav isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
           <main>
-            <Post postId={27} />
+            <Post postId={31} />
             <Outlet />
           </main>
         </>

@@ -1,6 +1,6 @@
 import multer from "multer";
 
-const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml']
+const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml', 'image/avif',]
 
 // Configure Multer to hold files in temporary RAM first
 const storage = multer.memoryStorage();

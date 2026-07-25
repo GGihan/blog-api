@@ -63,8 +63,11 @@ label,
   --color-ui-dark: #1e55d7;
   --color-ui-very-dark: #1946b1;
   /* Standard Gray */
+  --color-gray-alot-light: #f8f8f8;
   --color-gray-very-light: #ebeced;
   --color-gray-light: #c4c6ca;
+  --color-gray: #7e7f83;
+  --color-gray-dark: #6c6c6e;
   /* Standard White */
   --color-white: #ffffff;
 }

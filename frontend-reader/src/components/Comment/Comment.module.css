@@ -1,0 +1,21 @@
+.commentContainer {
+  gap: var(--space-s);
+  padding: var(--space-s);
+  background-color: var(--color-ui-very-light);
+  border-radius: var(--space-s);
+  word-break: break-all;
+}
+
+.author {
+  border-bottom: 1px solid black;
+  padding-bottom: var(--space-xs);
+}
+
+.content {
+  min-height: 75px;
+}
+
+.postDate {
+  align-self: flex-end;
+  color: var(--color-gray-dark);
+}
