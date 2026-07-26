@@ -77,7 +77,6 @@ export default function MainNav({ isOpen, onClose }) {
             <Button
               className={styles.logoutButton}
               onClick={() => logout()}
-              aria-hidden="true"
             >
               <img
                 className={styles.linkIcon}
@@ -85,6 +84,7 @@ export default function MainNav({ isOpen, onClose }) {
                 alt=""
                 width="30"
                 height="30"
+                aria-hidden="true"
               />
               Logout
             </Button>

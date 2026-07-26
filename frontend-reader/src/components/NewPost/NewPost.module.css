@@ -60,7 +60,8 @@
 }
 
 .postButton:active {
-  transform: scale(0.95);
+  filter: brightness(0.9);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.3);
 }
 
 @media (min-width: 1024px) {

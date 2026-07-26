@@ -70,6 +70,11 @@ label,
   --color-gray-dark: #6c6c6e;
   /* Standard White */
   --color-white: #ffffff;
+  /* Confirmation */
+  --color-confirm: #36da7d;
+  --color-confirm-dark: #2bad63;
+  --color-deny: #e24848;
+  --color-deny-dark: #b73a3a;
 }
 
 img, picture, video, canvas, svg {

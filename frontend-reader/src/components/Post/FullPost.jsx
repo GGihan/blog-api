@@ -29,7 +29,7 @@ export default function FullPost() {
     reValidateMode: 'onSubmit',
   });
 
-  const onCommentSubmit = async (commentData) => {
+  const handleSubmitComment = async (commentData) => {
     try {
       await apiClient(`/posts/${postId}/comments`, {
         method: 'POST',
@@ -140,7 +140,7 @@ export default function FullPost() {
             </ul>
           </div>
         )}
-        <form onSubmit={handleSubmit(onCommentSubmit)} className={`${styles.commentForm} flex-column`}>
+        <form onSubmit={handleSubmit(handleSubmitComment)} className={`${styles.commentForm} flex-column`}>
           <div className={styles.formGroup}>
             <label htmlFor="content">Add comment</label>
             <textarea
@@ -165,7 +165,11 @@ export default function FullPost() {
       <div className={`${styles.allCommentsContainer} flex-column`}>
         {post.comments?.length > 0 ? (
           post.comments.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
+            <Comment
+              key={comment.id}
+              comment={comment}
+              refetchPost={refetchPost}
+            />
           )) 
         ) : (
           <p>No comments yet. Be the first to comment!</p>
