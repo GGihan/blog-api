@@ -3,8 +3,6 @@ import { format } from 'date-fns';
 import { useWatch, useForm } from "react-hook-form";
 import { apiClient } from "@/config/api";
 import Button from "../Button/Button";
-// import edit from "@/assets/images/edit.svg";
-// import deleteIcon from "@/assets/images/delete.svg";
 import useSWR from "swr";
 import Comment from "../Comment/Comment";
 import { useNavigate, useParams } from "react-router";
@@ -107,34 +105,6 @@ export default function FullPost() {
             <p className={styles.postAuthor}>Created by {post.user?.username}</p>
             <p className={styles.postDate}>On {formattedPostDate}</p>
           </div>
-          {/* <div className={styles.controlsContainer}>
-            <Button
-              className={styles.editButton}
-              onClick={handleEditClick}
-            >
-              <img
-                className={styles.editImage}
-                src={edit}
-                alt=""
-                width='24'
-                height='24'
-              />
-              Edit
-            </Button>
-            <Button
-              className={styles.deleteButton}
-              onClick={handleDeleteClick}
-            >
-              <img
-                className={styles.deleteImage}
-                src={deleteIcon}
-                alt=""
-                width='24'
-                height='24'
-              />
-              Delete
-            </Button>
-          </div> */}
         </div>
       </div>
       <div className={`${styles.addCommentContainer} flex-column`}>

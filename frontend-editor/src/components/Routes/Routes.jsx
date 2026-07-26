@@ -19,13 +19,19 @@ const routes = [
       {
         path: 'posts',
         children: [
-          // {
-          //   path: 'new',
-          //   element: <NewPost />, // Route: /posts/new
-          // },
+          {
+            path: 'new',
+            element: <NewPost />, // Route: /posts/new
+          },
           {
             path: ':postId',
             element: <FullPost />, // Route: /posts/123
+            children: [
+              // {
+              //   path: 'edit',
+              //   element: <EditPost /> // Route: /posts/25/edit
+              // },
+            ],
           },
         ],
       },

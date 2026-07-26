@@ -3,8 +3,6 @@ import { format } from 'date-fns';
 import { useWatch, useForm } from "react-hook-form";
 import { apiClient } from "@/config/api";
 import Button from "../Button/Button";
-// import edit from "@/assets/images/edit.svg";
-// import deleteIcon from "@/assets/images/delete.svg";
 import useSWR from "swr";
 import Comment from "../Comment/Comment";
 import { useNavigate, useParams } from "react-router";

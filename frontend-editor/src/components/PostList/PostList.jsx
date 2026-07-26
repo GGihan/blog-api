@@ -15,6 +15,7 @@ export default function PostList() {
     data,
     error: postsError,
     isLoading,
+    mutate: refetchPosts,
   } = useSWR(`/posts?page=${currentPage}&limit=10`, fetcher, { revalidateOnFocus: false, });
 
   const posts = data?.posts;
@@ -36,7 +37,7 @@ export default function PostList() {
 
       {posts?.length > 0 ? (
         posts.map((post) => (
-          <PartialPost key={post.id} post={post} />
+          <PartialPost key={post.id} post={post} refetchPosts={refetchPosts} />
         )) 
       ) : (
         <p>No posts yet.</p>

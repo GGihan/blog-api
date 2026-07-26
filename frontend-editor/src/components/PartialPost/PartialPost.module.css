@@ -69,6 +69,97 @@
   color: var(--color-gray-dark);
 }
 
+.published,
+.unpublished {
+  align-items: center;
+  align-self: flex-end;
+  font-family: var(--font-ui);
+  gap: var(--space-s);
+}
+
+.published {
+  filter: invert(53%) sepia(86%) saturate(393%) hue-rotate(94deg) brightness(91%) contrast(88%);
+}
+
+.unpublished {
+  filter: invert(36%) sepia(85%) saturate(2156%) hue-rotate(334deg) brightness(95%) contrast(89%);
+}
+
+.controlsContainer {
+  align-self: flex-end;
+  gap: var(--space-s);
+}
+
+.editButton,
+.deleteButton,
+.publishButton,
+.unpublishButton {
+  display: flex;
+  gap: var(--space-xs);
+  padding: var(--space-s);
+  border-radius: var(--space-m);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  width: auto;
+}
+
+.editButton {
+  background-color: var(--color-ui-dark);
+  color: var(--color-white);
+}
+
+.deleteButton {
+  background-color: var(--color-deny);
+}
+
+.publishButton {
+  background-color: var(--color-confirm);
+}
+
+.unpublishButton {
+  background-color: var(--color-pending);
+}
+
+@media (hover: hover) {
+  .deleteButton:hover {
+    background-color: var(--color-deny-dark);
+  }
+
+  .editButton:hover {
+    background-color: var(--color-ui-very-dark);
+  }
+
+  .publishButton:hover {
+    background-color: var(--color-confirm-dark);
+  }
+
+  .unpublishButton:hover {
+    background-color: var(--color-pending-dark);
+  }
+}
+
+.editButton:active,
+.deleteButton:active,
+.publishButton:active,
+.unpublishButton:active {
+  filter: brightness(0.9);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.publishStatusImage {
+  width: 30px;
+  height: 30px;
+  aspect-ratio: 1 / 1;
+}
+
+.editIcon,
+.deleteIcon,
+.publishButtonImage {
+  width: 20px;
+  height: 20px;
+  aspect-ratio: 1 / 1;
+}
+
 .commentContainer {
   justify-content: center;
   align-self: flex-end;
