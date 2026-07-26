@@ -3,12 +3,20 @@
   padding: var(--space-s);
   background-color: var(--color-ui-very-light);
   border-radius: var(--space-s);
-  word-break: break-all;
+  max-height: 500px;
+  /* Preserves consecutive spaces, tabs, and line breaks while wrapping lines normally */
+  white-space: pre-wrap;
+  /* Prevents long unbroken single words/strings from overflowing the container */
+  word-break: break-word;
 }
 
 .author {
   border-bottom: 1px solid black;
   padding-bottom: var(--space-xs);
+}
+
+.content {
+  overflow-y: auto;
 }
 
 .content,

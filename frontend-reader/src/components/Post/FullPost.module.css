@@ -32,7 +32,10 @@
   min-height: 300px;
   padding: var(--space-s);
   border-radius: var(--space-s);
-  
+  /* Preserves consecutive spaces, tabs, and line breaks while wrapping lines normally */
+  white-space: pre-wrap;
+  /* Prevents long unbroken single words/strings from overflowing the container */
+  word-break: break-word;
 }
 
 .infoContainer {
