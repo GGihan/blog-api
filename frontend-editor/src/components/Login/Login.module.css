@@ -1,0 +1,125 @@
+.desktopDisplay {
+  display: none;
+}
+
+.loginContainer {
+  padding: var(--space-m);
+  gap: var(--space-m);
+}
+
+.loginTitle {
+  margin-top: var(--space-xl);
+}
+
+.errorList {
+  gap: var(--space-s);
+}
+
+.errorItem {
+  padding: var(--space-s);
+  border: 1px solid red;
+  border-radius: var(--space-s);
+}
+
+.loginForm {
+  gap: var(--space-m);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.buttonContainer {
+  justify-content: space-between;
+  padding: var(--space-l) 0;
+}
+
+.returnButton,
+.loginButton {
+  padding: var(--space-s) var(--space-m);
+  border-radius: var(--space-m);
+}
+
+.returnButton:active,
+.loginButton:active {
+  filter: brightness(0.9);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.3);;
+}
+
+.returnButton {
+  gap: var(--space-s);
+  background-color: var(--color-gray-very-light);
+}
+
+.returnButton:hover {
+  background-color: var(--color-gray-light);
+}
+
+.loginButton {
+  color: var(--color-white);
+  background-color: var(--color-ui-dark);
+}
+
+.loginButton:hover {
+  background-color: var(--color-ui-very-dark);
+}
+
+@media (min-width: 800px) {
+  .fullDisplay {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(
+      100deg, 
+      var(--color-ui-light) 39.9%, 
+      var(--color-white) 40.1%
+    );
+  }
+  
+  .desktopDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    flex: 1;
+    padding: var(--space-xxl) var(--space-xxl) 200px var(--space-xxl);
+  }
+
+  .mobileDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 2;
+  }
+
+  .loginContainer {
+    max-width: 700px;
+    min-height: 600px;
+    padding: var(--space-xxl);
+  }
+
+  .sideText {
+    color: white;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sideTitle {
+    font-size: 2.75rem;
+  }
+
+  .sideText {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1350px) {
+  .sideTitle {
+    font-size: 3.75rem;
+  }
+
+  .sideText {
+    font-size: 1.75rem;
+  }
+}

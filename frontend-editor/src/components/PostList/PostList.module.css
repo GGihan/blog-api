@@ -1,0 +1,6 @@
+.allPostsContainer {
+  flex: 1;
+  max-width: 700px;
+  padding: var(--space-m);
+  background-color: var(--color-gray-alot-light);
+}

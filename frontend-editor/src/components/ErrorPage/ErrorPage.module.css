@@ -1,0 +1,33 @@
+.errorPage {
+  background-color: var(--color-gray-very-light);
+  min-height: 100dvh;
+  padding: var(--space-m);
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-m);
+}
+
+.link {
+  align-items: center;
+  gap: var(--space-s);
+  font-size: 1.5rem;
+  font-family: var(--font-ui);
+  padding: var(--space-s) var(--space-m);
+  background-color: var(--color-ui-dark);
+  border-radius: var(--space-s);
+}
+
+.link:hover {
+  background-color: var(--color-ui-very-dark);
+}
+
+.link:active {
+  filter: brightness(0.9);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.returnImage {
+  width: 30px;
+  height: 30px;
+  aspect-ratio: 1 / 1;
+}

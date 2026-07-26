@@ -1,0 +1,106 @@
+.postContainer {
+  flex: 1;
+  max-width: 700px;
+  padding: var(--space-m);
+  gap: var(--space-m);
+}
+
+.clickableArea {
+  gap: var(--space-m);
+  position: relative;
+}
+
+.imageContainer {
+  width: 100%;
+  max-height: 800px;
+}
+
+.postImage {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border: 2px solid black;
+  border-radius: var(--space-m)
+}
+
+.articleContainer {
+  gap: var(--space-m);
+}
+
+.postTitle {
+  padding-bottom: var(--space-l);
+  border-bottom: 2px solid black;
+}
+
+.postTitleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.postTitleLink:hover {
+  text-decoration: underline;
+}
+
+.postTitleLink::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.contentContainer {
+  min-height: 300px;
+  padding: var(--space-s);
+  border-radius: var(--space-s);
+  /* Preserves consecutive spaces, tabs, and line breaks while wrapping lines normally */
+  white-space: pre-wrap;
+  /* Prevents long unbroken single words/strings from overflowing the container */
+  word-break: break-word;
+}
+
+.infoContainer {
+  align-items: flex-end;
+  padding: var(--space-m) 0;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  color: var(--color-gray-dark);
+}
+
+.commentContainer {
+  justify-content: center;
+  align-self: flex-end;
+  gap: var(--space-s);
+}
+
+.commentImage {
+  height: 24px;
+  width: 24px;
+  aspect-ratio: 1 / 1;
+}
+
+.topDivider {
+  height: 50px;
+  background: linear-gradient(
+    135deg,
+    var(--color-gray-alot-light) 50.1%,
+    var(--color-ui-light) 49.9%
+  );
+}
+
+.bottomDivider {
+  height: 50px;
+  background: linear-gradient(
+    135deg,
+    var(--color-ui-light) 50.1%,
+    var(--color-gray-alot-light) 49.9%
+  );
+}
+
+/* Any buttons, author profile links, or like buttons sit ABOVE the card overlay */
+.interactiveElement {
+  position: relative;
+  z-index: 2;
+}

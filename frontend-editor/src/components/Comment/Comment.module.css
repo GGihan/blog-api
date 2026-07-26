@@ -1,0 +1,118 @@
+.commentContainer {
+  gap: var(--space-s);
+  padding: var(--space-s);
+  background-color: var(--color-ui-very-light);
+  border-radius: var(--space-s);
+  max-height: 500px;
+  /* Preserves consecutive spaces, tabs, and line breaks while wrapping lines normally */
+  white-space: pre-wrap;
+  /* Prevents long unbroken single words/strings from overflowing the container */
+  word-break: break-word;
+}
+
+.author {
+  border-bottom: 1px solid black;
+  padding-bottom: var(--space-xs);
+}
+
+.content {
+  overflow-y: auto;
+}
+
+.content,
+.textarea {
+  min-height: 75px;
+}
+
+.errorList {
+  gap: var(--space-s);
+}
+
+.errorItem {
+  padding: var(--space-s);
+  border: 1px solid red;
+  border-radius: var(--space-s);
+}
+
+.commentForm {
+  justify-content: space-between;
+  gap: var(--space-s);
+}
+
+.textarea {
+  resize: vertical;
+  width: 100%;
+  min-height: 100px;
+  max-height: 300px;
+}
+
+.characterCount {
+  align-self: flex-end;
+  padding: 0 var(--space-s);
+}
+
+.controls {
+  align-self: flex-end;
+  gap: var(--space-s);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  aspect-ratio: 1 / 1;
+}
+
+.cancelButton,
+.saveButton,
+.editButton,
+.deleteButton {
+  display: flex;
+  gap: var(--space-xs);
+  padding: var(--space-s);
+  border-radius: var(--space-m);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  width: auto;
+}
+
+.cancelButton {
+  background-color: var(--color-gray-light);
+}
+
+.cancelButton:hover {
+  background-color: var(--color-gray-dark);
+}
+
+.saveButton {
+  background-color: var(--color-confirm);
+}
+
+.saveButton:hover {
+  background-color: var(--color-confirm-dark);
+}
+
+.editButton {
+  background-color: var(--color-ui-dark);
+  color: var(--color-white);
+}
+
+.deleteButton {
+  background-color: var(--color-deny);
+}
+
+.deleteButton:hover {
+  background-color: var(--color-deny-dark);
+}
+
+.cancelButton:active,
+.saveButton:active,
+.editButton:active,
+.deleteButton:active {
+  filter: brightness(0.9);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.postDate {
+  align-self: flex-end;
+  color: var(--color-gray-dark);
+}
