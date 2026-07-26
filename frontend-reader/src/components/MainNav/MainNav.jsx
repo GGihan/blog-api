@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import Button from "../Button/Button";
 import styles from "./MainNav.module.css";
 import close from "@/assets/images/close.svg";
@@ -9,8 +9,13 @@ import login from "@/assets/images/log-in.svg";
 import logoutIcon from "@/assets/images/log-out.svg";
 
 export default function MainNav({ isOpen, onClose }) {
-
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/', { replace: true });
+  }
 
   return (
     <nav className={`main-nav ${styles.navContainer} ${isOpen ? styles.navOpen : ''}`}>
@@ -76,7 +81,7 @@ export default function MainNav({ isOpen, onClose }) {
           <li className={styles.menuItem}>
             <Button
               className={styles.logoutButton}
-              onClick={() => logout()}
+              onClick={handleLogout}
             >
               <img
                 className={styles.linkIcon}

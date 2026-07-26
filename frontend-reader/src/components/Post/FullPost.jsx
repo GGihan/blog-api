@@ -7,13 +7,15 @@ import Button from "../Button/Button";
 // import deleteIcon from "@/assets/images/delete.svg";
 import useSWR from "swr";
 import Comment from "../Comment/Comment";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { useEffect } from "react";
 
 // Fetch helper function for useSWR, sets data to post object immediately
 const fetcher = (url) => apiClient(url).then(res => res.post);
 
 export default function FullPost() {
   const { postId } = useParams()
+  const navigate = useNavigate();
   // useSWR handles data, error and loading state, automatically refetches data on 4 conditions
   const {
     data: post,
@@ -71,6 +73,13 @@ export default function FullPost() {
     defaultValue: '',
   });
   const maxContentLength = 500;
+
+  // redirect after rendering component
+  useEffect(() => {
+    if (postError) {
+      navigate('/', { replace: true });
+    }
+  }, [postError, navigate]);
 
   if (isPostLoading) return <div>Loading post...</div>;
   if (postError) return <div>{postError.message || "Failed to load post."}</div>;
