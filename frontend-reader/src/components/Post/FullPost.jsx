@@ -22,7 +22,7 @@ export default function FullPost() {
     mutate: refetchPost
   } = useSWR(`/posts/${postId}`, fetcher, { revalidateOnFocus: false, }); // disable refetch on tab switching
 
-  const { register, handleSubmit, setError, control, resetField, formState: { errors } } = useForm({
+  const { register, handleSubmit, setError, control, resetField, formState: { errors, isSubmitting } } = useForm({
     defaultValues: {
       content: '',
     },
@@ -149,13 +149,14 @@ export default function FullPost() {
               {...register('content')}
               placeholder="Some comment for the post..."
               maxLength={maxContentLength}
+              disabled={isSubmitting}
             />
             <div className={styles.characterCount}>
               {contentValue.length} / {maxContentLength}
             </div>
           </div>
 
-          <Button className={styles.commentButton} type='submit'>
+          <Button className={styles.commentButton} type='submit' disabled={isSubmitting}>
             Comment
           </Button>
         </form>

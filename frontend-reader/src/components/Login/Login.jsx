@@ -7,7 +7,7 @@ import Button from "../Button/Button";
 import arrowLeft from "@/assets/images/arrow-left.svg"
 
 export default function Login() {
-  const { register, handleSubmit, setError, formState: { errors } } = useForm({
+  const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm({
     reValidateMode: 'onSubmit',
   });
 
@@ -107,7 +107,7 @@ export default function Login() {
                 />
                 Return
               </Button>
-              <Button className={styles.loginButton} type='submit'>
+              <Button className={styles.loginButton} type='submit' disabled={isSubmitting}>
                 Login
               </Button>
             </div>

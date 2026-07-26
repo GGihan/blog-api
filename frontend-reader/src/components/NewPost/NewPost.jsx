@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 import styles from "./NewPost.module.css";
 
 export default function NewPost() {
-  const { register, handleSubmit, setError, control, formState: { errors } } = useForm({
+  const { register, handleSubmit, setError, control, formState: { errors, isSubmitting } } = useForm({
     reValidateMode: 'onSubmit',
   });
 
@@ -129,7 +129,7 @@ export default function NewPost() {
           />
         </div>
 
-        <Button className={styles.postButton} type='submit'>
+        <Button className={styles.postButton} type='submit' disabled={isSubmitting}>
           Post
         </Button>
       </form>

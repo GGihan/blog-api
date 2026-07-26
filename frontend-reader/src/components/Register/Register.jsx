@@ -7,7 +7,7 @@ import Button from '../Button/Button';
 import arrowLeft from '@/assets/images/arrow-left.svg';
 
 export default function Register() {
-  const { register, handleSubmit, setError, formState: { errors } } = useForm({
+  const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm({
     reValidateMode: 'onSubmit',
   });
 
@@ -118,7 +118,7 @@ export default function Register() {
                 />
                 Return
               </Button>
-              <Button className={styles.registerButton} type='submit'>
+              <Button className={styles.registerButton} type='submit' disabled={isSubmitting}>
                 Register
               </Button>
             </div>
