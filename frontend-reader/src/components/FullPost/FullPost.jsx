@@ -107,34 +107,6 @@ export default function FullPost() {
             <p className={styles.postAuthor}>Created by {post.user?.username}</p>
             <p className={styles.postDate}>On {formattedPostDate}</p>
           </div>
-          {/* <div className={styles.controlsContainer}>
-            <Button
-              className={styles.editButton}
-              onClick={handleEditClick}
-            >
-              <img
-                className={styles.editImage}
-                src={edit}
-                alt=""
-                width='24'
-                height='24'
-              />
-              Edit
-            </Button>
-            <Button
-              className={styles.deleteButton}
-              onClick={handleDeleteClick}
-            >
-              <img
-                className={styles.deleteImage}
-                src={deleteIcon}
-                alt=""
-                width='24'
-                height='24'
-              />
-              Delete
-            </Button>
-          </div> */}
         </div>
       </div>
       <div className={`${styles.addCommentContainer} flex-column`}>

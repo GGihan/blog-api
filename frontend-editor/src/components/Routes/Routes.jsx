@@ -4,7 +4,7 @@ import Login from "../Login/Login";
 import ErrorPage from "../ErrorPage/Errorpage";
 import NewPost from "../NewPost/NewPost";
 import PostList from "../PostList/PostList";
-import FullPost from "../Post/FullPost";
+import FullPost from "../FullPost/FullPost";
 
 const routes = [
   {
