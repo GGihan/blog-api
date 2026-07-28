@@ -16,6 +16,7 @@ function getStoragePathFromUrl(publicUrl, bucketName) {
 // Controls
 export const getAllPosts = async (req, res) => {
   const userRole = req.user?.role;
+  const { published } = req.query;
   // Set limit for post amount per page
   const MAX_LIMIT = 50;
   const page = Math.max(1, parseInt(req.query.page) || 1);
@@ -30,6 +31,9 @@ export const getAllPosts = async (req, res) => {
   let whereClause = {};
   if (userRole !== 'AUTHOR') {
     whereClause = { published: true };
+  } else if (published !== undefined && published !== '') {
+    // Authors can explicitly filter by true or false
+    whereClause.published = published === 'true';
   }
   // Use $transaction to prevent race condition
   const [allPosts, totalPosts] = await prisma.$transaction([

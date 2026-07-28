@@ -4,3 +4,18 @@
   padding: var(--space-m);
   background-color: var(--color-gray-alot-light);
 }
+
+.publishFilterButton {
+  align-self: center;
+  color: var(--color-white);
+  background-color: var(--color-ui-dark);
+  padding: var(--space-s) var(--space-m);
+  border-radius: var(--space-m);
+  width: 200px;
+  margin-bottom: var(--space-l);
+}
+
+.publishFilterButton:active {
+  filter: brightness(0.9);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.3);
+}
