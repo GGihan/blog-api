@@ -1,3 +1,15 @@
+.cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.loginLink {
+  text-decoration: underline;
+  color: var(--color-ui-dark);
+}
+
 .allPostsContainer {
   flex: 1;
   max-width: 700px;

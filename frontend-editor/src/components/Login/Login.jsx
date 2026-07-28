@@ -1,7 +1,7 @@
 import styles from "./Login.module.css";
 import { useForm } from 'react-hook-form';
 import { useAuth } from '@/hooks/useAuth';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { apiClient } from '@/config/api';
 import Button from "../Button/Button";
 import arrowLeft from "@/assets/images/arrow-left.svg"
@@ -13,6 +13,9 @@ export default function Login() {
 
   const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || '/';
 
   const onSubmit = async (formData) => {
     try {
@@ -22,7 +25,7 @@ export default function Login() {
       });
       // Automatically login user
       login(data.user, data.token);
-      navigate('/', { replace: true });
+      navigate(from, { replace: true });
     } catch (error) {
       if (error.name === 'ApiError' && error.status === 400) {
         // Get key-value dictionary from error helper

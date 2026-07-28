@@ -6,6 +6,7 @@ import NewPost from "../NewPost/NewPost";
 import PostList from "../PostList/PostList";
 import FullPost from "../FullPost/FullPost";
 import EditPost from "../EditPost/EditPost";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 const routes = [
   {
@@ -21,16 +22,21 @@ const routes = [
         path: 'posts',
         children: [
           {
-            path: 'new',
-            element: <NewPost />, // Route: /posts/new
-          },
-          {
-            path: ':postId',
-            element: <FullPost />, // Route: /posts/123
-          },  
-          {
-            path: ':postId/edit',
-            element: <EditPost /> // Route: /posts/25/edit
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: 'new',
+                element: <NewPost />, // Route: /posts/new
+              },
+              {
+                path: ':postId',
+                element: <FullPost />, // Route: /posts/123
+              },  
+              {
+                path: ':postId/edit',
+                element: <EditPost /> // Route: /posts/25/edit
+              },
+            ],
           },
         ],
       },
