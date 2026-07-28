@@ -7,6 +7,7 @@ import home from "@/assets/images/home.svg";
 import register from "@/assets/images/sign-up.svg";
 import login from "@/assets/images/log-in.svg";
 import logoutIcon from "@/assets/images/log-out.svg";
+import addIcon from "@/assets/images/add.svg";
 
 export default function MainNav({ isOpen, onClose }) {
   const navigate = useNavigate();
@@ -78,7 +79,21 @@ export default function MainNav({ isOpen, onClose }) {
             </li>
           </>
         ) : (
-          <li className={styles.menuItem}>
+          <>
+            <li className={styles.menuItem}>
+              <NavLink to="/posts/new" className={`${styles.linkGroup}`}>
+                <img
+                  className={styles.linkIcon}
+                  src={addIcon}
+                  alt=""
+                  width="30"
+                  height="30"
+                  aria-hidden="true"
+                />
+                <p className={styles.linkText}>New post</p>
+              </NavLink>
+            </li>
+            <li className={styles.menuItem}>
             <Button
               className={styles.logoutButton}
               onClick={handleLogout}
@@ -94,6 +109,7 @@ export default function MainNav({ isOpen, onClose }) {
               Logout
             </Button>
           </li>
+          </>
         )}
       </ul>
     </nav>
