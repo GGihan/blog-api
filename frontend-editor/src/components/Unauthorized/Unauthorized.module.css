@@ -1,0 +1,16 @@
+.unauthorizedContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  height: 100vh;
+}
+
+.errorMessage {
+  color: var(--color-deny);
+}
+
+.loginLink {
+  text-decoration: underline;
+  color: var(--color-ui-dark);
+}

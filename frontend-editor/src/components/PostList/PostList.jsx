@@ -5,12 +5,10 @@ import useSWR from "swr";
 import { Link, useSearchParams } from "react-router";
 import Pagination from "../Pagination/Pagination";
 import Button from "../Button/Button";
-import { useAuth } from "@/hooks/useAuth";
 
 const fetcher = (url) => apiClient(url);
 
 export default function PostList() {
-  const { user } = useAuth();
   const [ searchParams, setSearchParams ] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
   const published = searchParams.get('published') || '';
@@ -53,16 +51,6 @@ export default function PostList() {
     setSearchParams(newParams);
   };
 
-  if (!user) {
-    return (
-      <div className={`${styles.cover} flex-column`}>
-        <p>Log in to view your posts!</p>
-        <Link to="/login" className={styles.loginLink}>
-          Login
-        </Link>
-      </div>
-    );
-  } 
   if (isLoading) return <div>Loading posts...</div>;
   if (postsError) return <div>{postsError?.message || "Failed to load posts."}</div>
 

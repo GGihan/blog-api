@@ -7,6 +7,7 @@ import PostList from "../PostList/PostList";
 import FullPost from "../FullPost/FullPost";
 import EditPost from "../EditPost/EditPost";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Unauthorized from "../Unauthorized/Unauthorized";
 
 const routes = [
   {
@@ -15,15 +16,15 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
-        element: <PostList />,
-      },
-      {
-        path: 'posts',
+        element: <ProtectedRoute />,
         children: [
           {
-            element: <ProtectedRoute />,
-            children: [
+            index: true,
+            element: <PostList />,
+          },
+          {
+            path: 'posts',
+            children: [ 
               {
                 path: 'new',
                 element: <NewPost />, // Route: /posts/new
@@ -38,7 +39,7 @@ const routes = [
               },
             ],
           },
-        ],
+        ],  
       },
     ],
   },
@@ -50,6 +51,11 @@ const routes = [
   {
     path: '/login',
     element: <Login />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/unauthorized',
+    element: <Unauthorized />,
     errorElement: <ErrorPage />,
   },
 ];

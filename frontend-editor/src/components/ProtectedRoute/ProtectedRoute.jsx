@@ -14,5 +14,11 @@ export default function ProtectedRoute() {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
+  const isAuthor = user.role === 'AUTHOR';
+
+  if (!isAuthor) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
   return <Outlet />;
 };
