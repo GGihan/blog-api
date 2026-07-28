@@ -243,6 +243,18 @@ export const deletePost = async (req, res) => {
     const deletedPost = await prisma.post.delete({
       where: { id: postId},
     });
+    // Check if imageUrl exists and get a FilePath
+    const filePath = getStoragePathFromUrl(deletedPost.imageUrl, bucketName);
+
+    if (filePath) {
+      const { error: deleteError } = await supabase.storage
+        .from(bucketName)
+        .remove([filePath]);
+
+      if (deleteError) {
+        throw new Error("Failed to delete image:", deleteError.message);
+      }
+    }
 
     res.json({
       success: true,

@@ -15,9 +15,11 @@ import { useState } from "react";
 
 export default function PartialPost({ post, refetchPosts }) {
   const [isUpdatingPublish, setIsUpdatingPublish] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleTogglePublish = async () => {
     setIsUpdatingPublish(true);
+    setErrorMessage('');
     try {
       await apiClient(`/posts/${post.id}`, {
         method: 'PATCH',
@@ -26,10 +28,29 @@ export default function PartialPost({ post, refetchPosts }) {
       await refetchPosts();
     } catch (error) {
       console.error(error.message || 'Could not publish post.')
+      setErrorMessage(
+        error?.message || 'Could not publish post. Please try again.'
+      );
     } finally {
       setIsUpdatingPublish(false);
     }
   };
+
+  const handleDeletePost = async () => {
+    setErrorMessage('');
+    try {
+      await apiClient(`/posts/${post.id}`, {
+        method: 'DELETE',
+      });
+    } catch (error) {
+      console.error("Failed to delete comment:", error.message);
+      setErrorMessage(
+        error?.message || 'Could not delete post. Please try again.'
+      );
+    } finally {
+      refetchPosts();
+    }
+  }
 
   const formattedPostDate = format(new Date(post?.createdAt), 'MM.dd.yyyy h:mm a').toLowerCase();
   return (
@@ -75,6 +96,7 @@ export default function PartialPost({ post, refetchPosts }) {
         />
         {post.published ? 'Published' : 'Draft'}
       </div>
+      {errorMessage && <p className={`${styles.errorMessage}error-message`}>{errorMessage}</p>}
       <div className={`${styles.controlsContainer} flex-row`}>
         <Button
           className={post.published ? styles.unpublishButton : styles.publishButton}
@@ -105,7 +127,7 @@ export default function PartialPost({ post, refetchPosts }) {
         </Link>
         <Button
           className={styles.deleteButton}
-          // onClick={handleDeletePost}
+          onClick={handleDeletePost}
         >
           <img
             className={styles.deleteImage}

@@ -85,6 +85,10 @@
   filter: invert(36%) sepia(85%) saturate(2156%) hue-rotate(334deg) brightness(95%) contrast(89%);
 }
 
+.errorMessage {
+  align-self: flex-end;
+}
+
 .controlsContainer {
   align-self: flex-end;
   gap: var(--space-s);
