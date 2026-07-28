@@ -1,14 +1,40 @@
 import { apiClient } from "@/config/api";
 import { useForm, useWatch } from "react-hook-form";
 import Button from "../Button/Button";
-import styles from "./NewPost.module.css";
-import { useNavigate } from "react-router";
+import styles from "./EditPost.module.css";
+import { useNavigate, useParams } from "react-router";
+import useSWR from "swr";
+import { useEffect, useState } from "react";
 
-export default function NewPost() {
+const fetcher = (url) => apiClient(url).then(res => res.post);
+
+export default function EditPost() {
+  const { postId } = useParams();
   const navigate = useNavigate();
+  const [previewUrl, setPreviewUrl] = useState(null)
 
-  const { register, handleSubmit, setError, control, formState: { errors, isSubmitting } } = useForm({
+  const {
+    data: post,
+    error: postError,
+    isLoading: isPostLoading,
+  } = useSWR(`/posts/${postId}`,
+    fetcher,
+    { revalidateOnFocus: false, } // disable refetch on tab switching
+  );
+
+  const {
+    register,
+    handleSubmit,
+    setError,
+    control,
+    formState: { errors, isSubmitting } 
+  } = useForm({
     reValidateMode: 'onSubmit',
+    values: {
+      title: post?.title || "",
+      content: post?.content || "",
+      published: post?.published || false,
+    },
   });
 
   const contentValue = useWatch({
@@ -31,12 +57,11 @@ export default function NewPost() {
         formData.append('file', data.file[0]); 
       }
 
-      const newPost = await apiClient('/posts', {
-        method: 'POST',
+      await apiClient(`/posts/${post.id}`, {
+        method: 'PATCH',
         body: formData,
       });
-      const postId = newPost.post.id;
-      navigate(`/posts/${postId}`);
+      navigate(`/posts/${post.id}`, { replace: true });
     } catch (error) {
       if (error.name === 'ApiError' && error.status === 400) {
         // Get key-value dictionary from error helper
@@ -66,9 +91,30 @@ export default function NewPost() {
     errors.root?.message,
   ].filter(Boolean);
 
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const objectUrl = URL.createObjectURL(file);
+      setPreviewUrl(objectUrl);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
+
+  const imageToShow = previewUrl || post?.imageUrl;
+
+  if (isPostLoading) return <div>Loading post...</div>;
+  if (postError) return <div>{postError.message || "Failed to load post."}</div>;
+
   return (
     <div className={`${styles.postContainer} flex-column`}>
-      <h1 className={styles.pageTitle}>Create new post</h1>
+      <h1 className={styles.pageTitle}>Edit post</h1>
       {activeErrorMessages.length > 0 && (
         <div className={styles.errorContainer}>
           <ul className={`${styles.errorList} flex-column`}>
@@ -115,13 +161,26 @@ export default function NewPost() {
             {...register('file', {
               validate: {
                 lessThan10MB: (files) =>
-                  !files[0] ||
+                  !files?.[0] ||
                   files[0].size <= 10 * 1024 * 1024 ||
                   'Image must be smaller than 10MB',
+              },
+              onChange: (e) => {
+                handleFileChange(e);
               },
             })}
           />
         </div>
+
+        {(imageToShow) && (
+          <div className={styles.imageContainer}>
+            <img
+              className={styles.postImage}
+              src={imageToShow} 
+              alt=""
+            />
+          </div>
+        )}
 
         <div className={styles.formGroupCheckbox}>
           <label htmlFor="published">Publish</label>
@@ -134,7 +193,7 @@ export default function NewPost() {
         </div>
 
         <Button className={styles.postButton} type='submit' disabled={isSubmitting}>
-          Post
+          Confirm
         </Button>
       </form>
     </div>

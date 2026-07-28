@@ -5,6 +5,7 @@ import ErrorPage from "../ErrorPage/Errorpage";
 import NewPost from "../NewPost/NewPost";
 import PostList from "../PostList/PostList";
 import FullPost from "../FullPost/FullPost";
+import EditPost from "../EditPost/EditPost";
 
 const routes = [
   {
@@ -26,12 +27,10 @@ const routes = [
           {
             path: ':postId',
             element: <FullPost />, // Route: /posts/123
-            children: [
-              // {
-              //   path: 'edit',
-              //   element: <EditPost /> // Route: /posts/25/edit
-              // },
-            ],
+          },  
+          {
+            path: ':postId/edit',
+            element: <EditPost /> // Route: /posts/25/edit
           },
         ],
       },

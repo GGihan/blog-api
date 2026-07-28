@@ -5,6 +5,14 @@ import { supabase } from "../../lib/supabase.js";
 // Storage
 const bucketName = 'blog-media';
 
+// Helper functions
+function getStoragePathFromUrl(publicUrl, bucketName) {
+  if (!publicUrl) return null;
+  const parts = publicUrl.split(`/storage/v1/object/public/${bucketName}/`);
+  // Returns: userId/post-images/123.jpg
+  return parts.length > 1 ? parts[1] : null;
+}
+
 // Controls
 export const getAllPosts = async (req, res) => {
   const userRole = req.user?.role;
@@ -149,7 +157,56 @@ export const createPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
   let { title, content, published } = matchedData(req);
+  const userId = req.user.id;
   const postId = parseInt(req.params.postId);
+  const post = await prisma.post.findUnique({
+    where: { id: postId }
+  });
+  const oldImageUrl = post.imageUrl;
+  let imageUrl = oldImageUrl;
+
+  if (req.file) {
+    const file = req.file;
+    const fileExt = file.originalname.split('.').pop();
+    const fileName = `${crypto.randomUUID()}.${fileExt}`;
+    const filePath = `${userId}/post-images/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from(bucketName)
+      .upload(filePath, file.buffer, {
+        contentType: file.mimetype,
+        upsert: false,
+      });
+
+    if (uploadError) {
+      throw new Error(`Supabase Storage Error: ${uploadError.message}`);
+    }
+
+    const { data: urlData } = supabase.storage
+      .from(bucketName)
+      .getPublicUrl(filePath);
+
+    imageUrl = urlData.publicUrl;
+
+    if (oldImageUrl) {
+      try {
+        const oldFilePath = getStoragePathFromUrl(oldImageUrl, bucketName);
+
+        if (oldFilePath) {
+          const { error: deleteError } = await supabase.storage
+            .from(bucketName)
+            .remove([oldFilePath]);
+
+          if (deleteError) {
+            console.error("Failed to delete old image:", deleteError.message);
+          }
+        }
+      } catch (err) {
+        console.error("Error during old image cleanup:", err);
+      }
+    }
+  }
+
   try {
     const updatedPost = await prisma.post.update({
       where: { id: postId },
@@ -157,6 +214,7 @@ export const updatePost = async (req, res) => {
         title,
         content, 
         published,
+        imageUrl,
       },
     });
 

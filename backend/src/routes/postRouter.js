@@ -22,7 +22,7 @@ postRouter.patch('/:postId',
   requireAuth,
   isAuthor,
   validateId,
-  // uploadSingleFile,
+  uploadSingleFile,
   validateUpdatePost,
   handleValidation,
   updatePost

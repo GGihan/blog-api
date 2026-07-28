@@ -72,7 +72,7 @@ export default function FullPost() {
   });
   const maxContentLength = 500;
 
-  // redirect after rendering component
+  // redirect after rendering component with error
   useEffect(() => {
     if (postError) {
       navigate('/', { replace: true });

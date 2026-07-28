@@ -17,7 +17,7 @@ export default function Comment({ comment, refetchPost }) {
   const formattedCommentDate = format(new Date(comment?.createdAt), 'MM.dd.yyyy h:mm a').toLowerCase();
 
   const [ isEditing, setIsEditing ] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [ isDeleting, setIsDeleting ] = useState(false);
 
   const {
     register,
