@@ -119,9 +119,10 @@ export default function Register() {
                 Return
               </Button>
               <Button className={styles.registerButton} type='submit' disabled={isSubmitting}>
-                Register
+                {isSubmitting ? 'Creating account...': 'Register'}
               </Button>
             </div>
+            {isSubmitting && <div>Server is starting up, this might take a while...</div>}
           </form>
           <hr></hr>
         </div>

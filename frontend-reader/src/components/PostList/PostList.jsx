@@ -24,7 +24,7 @@ export default function PostList() {
     setSearchParams({ page: newPage });
   };
 
-  if (isLoading) return <div>Loading posts...</div>;
+  if (isLoading) return <div>Loading posts... Server is starting up, this might take a while...</div>;
   if (postsError) return <div>{postsError?.message || "Failed to load posts."}</div>
 
   return (

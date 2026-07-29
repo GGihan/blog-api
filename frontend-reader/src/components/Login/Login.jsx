@@ -108,9 +108,10 @@ export default function Login() {
                 Return
               </Button>
               <Button className={styles.loginButton} type='submit' disabled={isSubmitting}>
-                Login
+                {isSubmitting ? 'Logging in...': 'Login'}
               </Button>
             </div>
+            {isSubmitting && <div>Server is starting up, this might take a while...</div>}
           </form>
           <hr></hr>
         </div>
