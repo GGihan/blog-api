@@ -1,7 +1,6 @@
 .postContainer {
   flex: 1;
   max-width: 700px;
-  padding: var(--space-m);
   gap: var(--space-m);
 }
 
