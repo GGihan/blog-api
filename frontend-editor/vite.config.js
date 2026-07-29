@@ -16,6 +16,9 @@ export default defineConfig({
       presets: [reactCompilerPreset()]
     }),
   ],
+  server: {
+    port: 5174,
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
