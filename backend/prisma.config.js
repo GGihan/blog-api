@@ -10,6 +10,7 @@ export default defineConfig({
   },
   datasource: {
     // Change to DIRECT_URL when using cloud db
-    url: process.env["DATABASE_URL"],
+    // url: process.env["DATABASE_URL"],
+    url: process.env["DIRECT_URL"],
   },
 });
