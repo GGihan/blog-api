@@ -1,5 +1,6 @@
 .postContainer {
   flex: 1;
+  width: 100%;
   padding: var(--space-m);
   gap: var(--space-m);
 }
@@ -81,6 +82,7 @@
 @media (min-width: 1024px) {
   .postContainer {
     flex: unset;
+    width: unset;
     gap: var(--space-xl);
   }
 
