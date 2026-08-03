@@ -13,6 +13,7 @@ function App() {
   return (
     <div className='app-container'>
       <Header onMenuToggle={() => setIsMenuOpen(!isMenuOpen)} />
+      {isLoadingAuth && <div>Server is starting up, this might take a while...</div>}
       {!isLoadingAuth && (
         <>
           <MainNav isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
